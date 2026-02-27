@@ -19,30 +19,17 @@ public class UIPrefabManager : SingletonGameObject<UIPrefabManager>
         UIPage(false);
     }
 
-    //private MessageBox MessageBox { get; set; }
-    //public MessageBox MessageBoxProperty
-    //{
-    //    get
-    //    {
-    //        if (MessageBox == null)
-    //            MessageBox = GetPrefab("UI/MessageBox").GetComponent<MessageBox>();
-    //        MessageBox.transform.SetAsLastSibling();
-    //        return MessageBox;
-    //    }
-    //}
-
-    //private SelectSkillPage SelectSkillPage { get; set; }
-    //public SelectSkillPage SelectSkillPageProperty
-    //{
-    //    get
-    //    {
-    //        if (SelectSkillPage == null)
-    //            SelectSkillPage = GetPrefab("UI/SelectSkillPage").GetComponent<SelectSkillPage>();
-    //        SelectSkillPage.transform.SetAsLastSibling();
-    //        return SelectSkillPage;
-    //    }
-    //}
-
+    private MessageBox MessageBox { get; set; }
+    public MessageBox MessageBoxProperty
+    {
+        get
+        {
+            if (MessageBox == null)
+                MessageBox = GetPrefab("UI/MessageBox").GetComponent<MessageBox>();
+            MessageBox.transform.SetAsLastSibling();
+            return MessageBox;
+        }
+    }
 
     public GameObject GetPrefab(string _path, Transform _parent = null, bool _isAssetBundle = false)
     {

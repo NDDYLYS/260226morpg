@@ -9,7 +9,7 @@ using System.Linq;
 
 
 
-public class TableDataManager : SingletonGameObject<TableDataManager>
+public partial class TableDataManager : SingletonGameObject<TableDataManager>
 {
     public SystemLanguage Language;
     public bool IsUseAssetBundle;
@@ -20,8 +20,8 @@ public class TableDataManager : SingletonGameObject<TableDataManager>
     private Dictionary<string, GameObject> LoadedPrefabDic = new Dictionary<string, GameObject>();
     private Dictionary<string, GameObject[]> LoadedPrefabsDic = new Dictionary<string, GameObject[]>(); // 챕터당 맵을 저장한다
 
-    //private Dictionary<string, AssetBundle> LoadedAssetBundles = new Dictionary<string, AssetBundle>();
-    //private Dictionary<string, Texture> LoadedTextures = new Dictionary<string, Texture>();
+    private Dictionary<string, AssetBundle> LoadedAssetBundles = new Dictionary<string, AssetBundle>();
+    private Dictionary<string, Texture> LoadedTextures = new Dictionary<string, Texture>();
 
     private void Awake()
     {
@@ -47,20 +47,22 @@ public class TableDataManager : SingletonGameObject<TableDataManager>
             if (info != null)
                 info.Invoke(null, null);
         }
+
+        LogManager.Instance.DebugLogCategory(LogCategoryEnum.Data, "테이블 로딩 완료!");
     }
 
-    //public void BundleTableLoad()
-    //{
-    //    TextAsset[] textAssets = LoadAllAssets<TextAsset>("tabledata", string.Format("Assets/AssetBundle/TableData/"));
-    //    for (int i = 0; i < textAssets.Length; i++)
-    //    {
-    //        Type type = Type.GetType(textAssets[i].name);
-    //        MethodInfo info = type.GetMethod("AutoLoadTable");
+    public void BundleTableLoad()
+    {
+        TextAsset[] textAssets = LoadAllAssets<TextAsset>("tabledata", string.Format("Assets/AssetBundle/TableData/"));
+        for (int i = 0; i < textAssets.Length; i++)
+        {
+            Type type = Type.GetType(textAssets[i].name);
+            MethodInfo info = type.GetMethod("AutoLoadTable");
 
-    //        if (info != null)
-    //            info.Invoke(null, null);
-    //    }
-    //}
+            if (info != null)
+                info.Invoke(null, null);
+        }
+    }
 
     public void SetDictinary<T>(int _index, string _codename, T _data)
     {
@@ -104,19 +106,19 @@ public class TableDataManager : SingletonGameObject<TableDataManager>
         return string.Format(GetTableText(_codename), param);
     }
 
-    //public string GetTableText(string _codename)
-    //{
-    //    Table_Text text = GetTableData<Table_Text>(_codename);
-    //    if (text == null)
-    //        return string.Format("{0}", _codename);
+    public string GetTableText(string _codename)
+    {
+        Table_Text text = GetTableData<Table_Text>(_codename);
+        if (text == null)
+            return string.Format("{0}", _codename);
 
-    //    if (Language == SystemLanguage.Korean)
-    //        return text.Korean;
-    //    else if (Language == SystemLanguage.English)
-    //        return text.English;
+        if (Language == SystemLanguage.Korean)
+            return text.Korean;
+        else if (Language == SystemLanguage.English)
+            return text.English;
 
-    //    return string.Format("None Text({0})", _codename);
-    //}
+        return string.Format("None Text({0})", _codename);
+    }
 
     //public string GetEditeGameText(string _codename, SystemLanguage _language)
     //{
@@ -227,7 +229,7 @@ public class TableDataManager : SingletonGameObject<TableDataManager>
 
         return default(T);
     }
-
+    
     public GameObject GetLoadedPrefab(string _path, bool _isAssetBundle = false)
     {
         if (LoadedPrefabDic.ContainsKey(_path))
@@ -266,24 +268,24 @@ public class TableDataManager : SingletonGameObject<TableDataManager>
         return prefabs;
     }
 
-    //public string[,] PublicExcelReader(string _csvFileName, bool _isResource = false)
-    //{
-    //    string content = string.Empty;
-    //    if (!_isResource)
-    //    {
-    //        string bundleName = "tabledata";
-    //        string bundlePath = string.Format("Assets/AssetBundle/TableData/{0}.csv", _csvFileName);
-    //        TextAsset csvFile = LoadAsset<TextAsset>(bundleName, bundlePath);
-    //        content = csvFile.text;
-    //    }
-    //    else
-    //    {
-    //        TextAsset csvFile = Resources.Load<TextAsset>(string.Format("TableData/{0}", _csvFileName));
-    //        content = csvFile.text;
-    //    }
+    public string[,] PublicExcelReader(string _csvFileName, bool _isResource = false)
+    {
+        string content = string.Empty;
+        if (!_isResource)
+        {
+            string bundleName = "tabledata";
+            string bundlePath = string.Format("Assets/AssetBundle/TableData/{0}.csv", _csvFileName);
+            TextAsset csvFile = LoadAsset<TextAsset>(bundleName, bundlePath);
+            content = csvFile.text;
+        }
+        else
+        {
+            TextAsset csvFile = Resources.Load<TextAsset>(string.Format("TableData/{0}", _csvFileName));
+            content = csvFile.text;
+        }
 
-    //    return Util.PublicExcelReader(content);
-    //}
+        return Util.PublicExcelReader(content);
+    }
 
     public T LoadAsset<T>(string bundleName, string path) where T : UnityEngine.Object
     {
@@ -293,61 +295,107 @@ public class TableDataManager : SingletonGameObject<TableDataManager>
             T asset = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(path);
             return asset;
         }
-        //else
+        else
 #endif
-        //{
-        //    AssetBundle bundle = GetAssetBundle(bundleName);
-        //    if (bundle != null)
-        //    {
-        //        T asset = bundle.LoadAsset<T>(path);
-        //        if (asset == null)
-        //        {
-        //            //LogManager.Instance.DebugLogCategory(LogCategoryEnum.IsBundle, string.Format("{0}' {1}을 불러오는 데에 실패하였다!!!", bundleName, path));
-        //        }
+        {
+            AssetBundle bundle = GetAssetBundle(bundleName);
+            if (bundle != null)
+            {
+                T asset = bundle.LoadAsset<T>(path);
+                if (asset == null)
+                {
+                    //LogManager.Instance.DebugLogCategory(LogCategoryEnum.IsBundle, string.Format("{0}' {1}을 불러오는 데에 실패하였다!!!", bundleName, path));
+                }
 
-        //        return asset;
-        //    }
-        //}
-
+                return asset;
+            }
+        }
+        
         return default(T);
     }
 
-    //public T[] LoadAllAssets<T>(string bundleName, string path) where T : UnityEngine.Object
-    //{
-    //    if (IsUseAssetBundle == false)
-    //    {
-    //        DirectoryInfo di = new DirectoryInfo(path);
-    //        FileInfo[] fis = di.GetFiles();
+    public T[] LoadAllAssets<T>(string bundleName, string path) where T : UnityEngine.Object
+    {
+        if (IsUseAssetBundle == false)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            FileInfo[] fis = di.GetFiles();
 
-    //        if (fis != null)
-    //        {
-    //            List<T> list = new List<T>();
-    //            int count = 0;
-    //            foreach (FileInfo info in fis)
-    //            {
-    //                T asset = LoadAsset<T>(bundleName, path + info.Name);
-    //                if (asset != null)
-    //                {
-    //                    list.Add(asset);
-    //                    count++;
-    //                }
-    //            }
-    //            return list.ToArray();
-    //        }
-    //        else
-    //        {
-    //            Debug.LogError("LoadAllAssets Fail : " + path);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        AssetBundle bundle = GetAssetBundle(bundleName);
-    //        if (bundle != null)
-    //        {
-    //            T[] assets = bundle.LoadAllAssets<T>();
-    //            return assets;
-    //        }
-    //    }
-    //    return null;
-    //}
+            if (fis != null)
+            {
+                List<T> list = new List<T>();
+                int count = 0;
+                foreach (FileInfo info in fis)
+                {
+                    T asset = LoadAsset<T>(bundleName, path + info.Name);
+                    if (asset != null)
+                    {
+                        list.Add(asset);
+                        count++;
+                    }
+                }
+                return list.ToArray();
+            }
+            else
+            {
+                Debug.LogError("LoadAllAssets Fail : " + path);
+            }
+        }
+        else
+        {
+            AssetBundle bundle = GetAssetBundle(bundleName);
+            if (bundle != null)
+            {
+                T[] assets = bundle.LoadAllAssets<T>();
+                return assets;
+            }
+        }
+        return null;
+    }
+
+    public AssetBundle GetAssetBundle(string _bundleName)
+    {
+        if (LoadedAssetBundles.ContainsKey(_bundleName))
+            return LoadedAssetBundles[_bundleName];
+        return null;
+    }
+
+    public void AddAssetBundle(AssetBundle _bundle)
+    {
+        if (_bundle == null)
+            return;
+        if (!LoadedAssetBundles.ContainsKey(_bundle.name))
+        {
+            //LogManager.Instance.DebugLogCategory(LogCategoryEnum.IsBundle, string.Format("{0}'s Load.", _bundle));
+            LoadedAssetBundles.Add(_bundle.name, _bundle);
+        }
+    }
+
+    public bool HasLoadedAssetBundle(string _key)
+    {
+        if (LoadedAssetBundles.ContainsKey(_key))
+        {
+            //LogManager.Instance.DebugLogCategory(LogCategoryEnum.IsBundle, string.Format("{0}'s Already Load.", _key));
+            return true;
+        }
+        //LogManager.Instance.DebugLogCategory(LogCategoryEnum.IsBundle, string.Format("{0}'s Not Load.", _key));
+        return false;
+    }
+
+    public Texture GetBundleTextures(string _textureName)
+    {
+        if (LoadedTextures.ContainsKey(_textureName))
+        {
+            return LoadedTextures[_textureName];
+        }
+
+        Texture texture = null;
+        string bundleName = "textures";
+        string bundlePath = string.Format("Assets/AssetBundle/Textures/{0}.png", _textureName);
+        texture = LoadAsset<Texture>(bundleName, bundlePath);
+
+        if (texture != null)
+            LoadedTextures.Add(_textureName, texture);
+        return texture;
+    }
 }

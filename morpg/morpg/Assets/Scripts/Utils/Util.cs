@@ -26,12 +26,22 @@ public partial class Util
             }
         }
 
+        LogManager.Instance.DebugLogCategory(LogCategoryEnum.Data, string.Format("not found column (Type : {0} , code : {1})", (typeof(T)).ToString(), p_code));
         return default(T);
     }
 
     public static string GetComma(long _value)
     {
         return string.Format("{0:#,##0}", _value);
+    }
+
+    public static void CreateFolder(string _path)
+    {
+        if (!Directory.Exists(_path))
+        {
+            Directory.CreateDirectory(_path);
+            LogManager.Instance.DebugLogCategory(LogCategoryEnum.Data, string.Format("<color=yellow>CreateFolder : {0}</color>", _path));
+        }
     }
 
     /// <summary>
@@ -116,7 +126,7 @@ public partial class Util
     {
         return Path.GetFullPath(string.Format("."));
     }
-
+    
     public static string GetReceipt(string _receipt)
     {
         //int index = _receipt.IndexOf("GPA.");
@@ -155,7 +165,7 @@ public partial class Util
         }
         return copy;
     }
-
+    
     /// <summary>
     /// string을 숫자만 남긴 다음 숫자로 반환한다
     /// </summary>
@@ -246,12 +256,30 @@ public partial class Util
         return obj;
     }
 
-    public static void CreateFolder(string _path)
-    {
-        if (!Directory.Exists(_path))
-        {
-            Directory.CreateDirectory(_path);
-        }
-    }
+    //public static void CreateEnemy(string _codename, Vector3 _position)
+    //{
+    //    GameObject obj = TableDataManager.Instance.GetLoadedPrefab(string.Format("Character/Dungeon/Enemy"));
+    //    obj = CreateObject(obj, Map.Instance.ObjectGenerator, _position, Vector3.one);
+    //    Enemy enemy = obj.GetComponent<Enemy>();
+    //    if (enemy != null)
+    //        enemy.SetEnemyStat(_codename);
+    //}
+    
+    //public static void CreateItem(string _codename, int _count, Vector3 _position, ItemState _state)
+    //{
+    //    GameObject obj = TableDataManager.Instance.GetLoadedPrefab(string.Format("Item/Item"));
+    //    obj = CreateObject(obj, Map.Instance.ObjectGenerator, _position, Vector3.one);
+    //    Item item = obj.GetComponent<Item>();
+    //    if (item != null)
+    //        item.SetItem(_codename, _count, _state);
+    //}
 
+    //public static void CreateSummon(string _codename, int _addLevel, Vector3 _position)
+    //{
+    //    GameObject obj = TableDataManager.Instance.GetLoadedPrefab(string.Format("Character/Dungeon/Summon"));
+    //    obj = CreateObject(obj, Map.Instance.ObjectGenerator, _position, Vector3.one);
+    //    Summon summon = obj.GetComponent<Summon>();
+    //    if (summon != null)
+    //        summon.SetSummonStat(_codename, _addLevel);
+    //}
 }

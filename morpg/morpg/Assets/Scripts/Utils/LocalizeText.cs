@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using TMPro;
 
 
 [RequireComponent(typeof(Text))]
 public class LocalizeText : MonoBehaviour
 {
     public string Codename;
-    private Text Text { get; set; }
-    public Text TextProperty
+    private TextMeshProUGUI Text { get; set; }
+    public TextMeshProUGUI TextProperty
     {
         get
         {
             if (Text == null)
-                Text = GetComponent<Text>();
+                Text = GetComponent<TextMeshProUGUI>();
             return Text;
         }
     }

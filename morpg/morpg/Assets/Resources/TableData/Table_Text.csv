@@ -1,0 +1,175 @@
+int,string,string,string
+Index,CodeName,Korean,English
+Array,,,
+Comment,,,
+10000,UI_STR,힘,STR
+10001,UI_AGI,민첩,AGI
+10002,UI_VIT,체력,VIT
+10003,UI_INT,지능,INT
+10004,UI_DEX,손재주,DEX
+10005,UI_LUK,운,LUK
+10006,UI_Crystal,크리스탈,Crystal
+10007,UI_ViewLog,전체보기,ViewLog
+10008,UI_Gold,골드,Gold
+10009,UI_GetItem,줍기,GetItem
+10010,UI_Pause,일시정지,Pause
+10011,UI_Move,이동,Move
+10012,UI_Attack,공격,Attack
+10013,UI_Stat,스탯,Stat
+10014,UI_Equipment,장비,Equipment
+10015,UI_Skill,스킬,Skill
+10016,UI_Material,재료,Material
+10017,UI_Confirm,확인,Confirm
+10018,UI_Cancel,취소,Cancel
+10019,UI_Exit,닫기,Exit
+10020,UI_TotalPlayTime,총 게임 플레이시간 : {0},TotalPlayTime {0}
+10021,UI_TotalTurnCount,총 게임 경과 턴수 : {0},TotalTurnCount {0}
+10022,UI_DungeonTryCount,던젼 시도 횟수({0}) : {1},DungeonTryCount({0}) : {1}
+10023,UI_DungeonClearCount,던젼 클리어 횟수({0}) : {1},DungeonClearCount({0}) : {1}
+10024,UI_BeginExp,초기 경험치 획득 : {0},BeginExp : {0}
+10025,UI_BeginGold,초기 골드 획득 : {0},BeginGold : {0}
+10027,UI_IncreaseExp,경험치 획득량 증가 : {0}%,IncreaseExp {0}%
+10028,UI_IncreaseGold,골드 획득량 증가 : {0}%,IncreaseGold {0}%
+10029,UI_IncreaseMaterial,재료아이템 획득량 증가 : {0}%,IncreaseMatherial {0}%
+10030,UI_All,전체,All
+10031,UI_RightHand,오른손,Right
+10032,UI_LeftHand,왼손,Left
+10033,UI_Head,머리,Head
+10034,UI_Body,몸,Body
+10035,UI_Legs,다리,Legs
+10036,UI_Equip,장착,Equip
+10037,UI_Release,해제,Release
+10038,UI_Battle,전투,Battle
+10039,UI_UI,UI,UI
+10040,UI_Create,제작,Create
+10041,UI_Buff,버프,Buff
+10042,UI_Change,교체,Change
+10043,UI_KIllCount,처치수 : {0},KillCount : {0}
+10044,UI_Having,보유 중,Having
+10045,UI_Creatable,제작 가능,Creatable
+10046,UI_Kind,분류 : {0},Kind : {0}
+10047,UI_Parts,부위 : {0},Parts : {0}
+10048,UI_Total,총합,Total
+10049,UI_Equiping,장착 중,Equiping
+10050,UI_Vallige,마을,Village
+10051,UI_Dungeon1F,던젼 1층,Dungeon1F
+10052,UI_Dungeon2F,던젼 2층,Dungeon2F
+10053,UI_Dungeon3F,던젼 3층,Dungeon3F
+10054,UI_Dungeon4F,던젼 4층,Dungeon4F
+10055,UI_Dungeon5F,던젼 5층,Dungeon5F
+10056,UI_MonsterRate,몬스터 능력치 {0}%,UI_MonsterRate{0}
+10057,UI_DropGrade,{0}\n등급의 장비와 스킬만 드랍 가능,UI_DropGrade{0}
+10058,UI_BuffIcrease,{0} 증가,{0} Increase
+10059,UI_DebuffDecrease,{0} 감소,{0} Decrease
+10060,UI_Select,선택,Select
+10061,UI_Easy,쉬움,Easy
+10062,UI_Normal,보통,Normal
+10063,UI_Hard,어려움,Hard
+10064,UI_Hell,지옥,Hell
+10065,UI_Register,등록,Register
+10066,UI_TurnPlayTime,{0}\n{1}턴 경과,{0}\n{1}Turn
+10067,UI_Type,재질 : {0},Type : {0}
+10068,UI_Cloth,천,UI_Cloth
+10069,UI_Leather,가죽,UI_Leather
+10070,UI_Metalic,금속,UI_Metalic
+10071,UI_EquipImpossibility,장착불가,장착불가
+10072,UI_Nightmare,악몽,Nightmare
+10073,UI_Chaos,혼돈,Chaos
+10074,UI_RequireDifficuly,{0}난이도 {1}/{2}번 클리어 필요,UI_RequireDifficuly {0} {1}/{2}
+10075,UI_RepeatDesc,누르고 있으면 빠르게 반복됩니다,RepeatDesc
+30000,Name_Human,인간,Human
+30001,Name_Mechanic,기계,Mechanic
+30002,Name_Rodec,로데크,Rodec
+30003,Name_Badrak,바드락,Badrak
+30004,Name_Selena,셀레나,Selena
+30005,Name_Turka,투르카,Turka
+30006,Name_Teemole,티모르,Teemole
+30007,Name_OneHandSword,검,NormalOneHandSword 
+30008,Name_OneHandDagger,단검,NormalOneHandDagger
+30009,Name_TwoHandSword,대검(양손),NormalTwoHandSword 
+30010,Name_OneHandShield,방패,NormalOneHandShield 
+30011,Name_TwoHandShield,방패(양손),TwoHandShield 
+30012,Name_OneHandMace,메이스,NormalOneHandMace 
+30013,Name_TwoHandSpear,창(양손),NormalTwoHandSpear 
+30014,Name_TwoHandBow,활(양손),NormalTwoHandBow 
+30015,Name_OneHandStaff,지팡이,NormalOneHandStaff 
+30016,Name_TwoHandStaff,지팡이(양손),NormalTwoHandStaff 
+30017,Name_Hat,모자,NormalHat 
+30018,Name_Helmet,투구,NormalHelmet 
+30019,Name_Cloth,옷,NormalCloth 
+30020,Name_Armor,갑옷,NormalArmor 
+30021,Name_Shoes,신발,NormalShoes 
+30022,Name_Boots,부츠,NormalBoots 
+30023,Name_FireOneHandSword,불타오르는 검,NormalFireOneHandSword 
+30024,Name_FireArmor,불타오르는 갑옷,NormalFireArmor 
+30025,Name_SetItem01,세트 아이템01 이름,SetItem01
+30025,Name_Normal,맨손,Name_Normal
+30025,Name_Sword,검,Name_Sword
+30025,Name_Dagger,단검,Name_Dagger
+30025,Name_Blade,대검,Name_Blade
+30025,Name_Mace,둔기,Name_Mace
+30025,Name_Spear,창,Name_Spear
+30025,Name_Bow,활,Name_Bow
+30025,Name_Staff,지팡이,Name_Staff
+30026,Name_SelfEnhancingMagic,자가강화마법,SelfEnhancingMagic
+30027,Name_SelfAreaHeal,자가광역힐,SelfAreaHeal
+30028,Name_Inferno,불바다,Inferno
+30029,Name_Summon,소환수,Summon
+30030,Name_Double,마법 이중화,Name_Double
+30031,Name_Triple,마법 삼중화,Name_Triple
+30032,Name_Maximize,마법 최대화,Name_Maximize
+30033,Name_MagicFixedDamage,마법 절대화,Name_MagicFixedDamage
+30034,Name_WearedFall,초성소멸마법 : 위아디폴,Name_WearedFall
+30035,Name_AdvancedWater,수속성 강화,Name_AdvancedWater
+30036,Name_AdvancedWind,풍속성 강화,Name_AdvancedWind
+30037,Name_AdvancedEarth,땅속성 강화,Name_AdvancedEarth
+30038,Name_AdvancedFire,화속성 강화,Name_AdvancedFire
+30039,Name_AdvancedPoison,독속성 강화,Name_AdvancedPoison
+30040,Name_AdvancedIce,얼음속성 강화,Name_AdvancedIce
+30041,Name_AdvancedLightning,번개속성 강화,Name_AdvancedLightning
+30042,Name_AdvancedLight,빛속성 강화,Name_AdvancedLight
+30043,Name_AdvancedDark,어둠속성 강화,Name_AdvancedDark
+30044,Name_AdvancedAll,모든속성 강화,Name_AdvancedAll
+40000,Desc_Human,가장 평균적인 종족\n신체 능력이 뛰어나지는 않지만\n대부분의 마법을 습득하고 대부분의 장비를 장착할 수 있다.,Human
+40001,Desc_Mechanic,상태이상에 내성을 가진다.\n체력과 마나가 자연회복 되지 않지만 마법이나 아이템으로는 회복할 수 있다.\n기계 종만 장착할 수 있는 특별한 장비가 존재한다.,Mechanic
+40002,Desc_Rodec,유일하게 인간보다 수가 많은 초다수종\n인간보다 신체 능력이 뛰어나지만 패시브를 제외한 액티브 마법을 배울 수 없다.\n장비 장착도 제한적이지만 대체로 효과는 높다.,Rodec
+40003,Desc_Badrak,전 세계에 개체수가 10마리가 되지 않는 초소수종\n드래곤과 비견되는 중간계 최강의 종족.\n대부분의 공격과 마법 상태이상에 강한 내성이 있지만\n유일하게 번개 속성에는 취약하다.,Badrak
+40004,Desc_Selena,물과 바다의 종족\n수면을 이동할 수 있으며 높은 자연 마나회복량을 지닌다.\n신체 능력은 낮지만 마법적 성장치가 높다.\n인간은 배울 수 없는 물의 대마도를 배울 수 있다.,Selena
+40005,Desc_Turka,바람과 창공의 종족\n비행을 통해 지형을 무시할 수 있다.\n인간과 비슷한 신체 능력이지만 명중률 회피율 크리티컬율이 높다.\n인간은 배울 수 없는 바람의 대마도를 배울 수 있다.,Turka
+40006,Desc_Teemole,땅과 대지의 종족\n넉백에 내성을 지니며 높은 자연 체력회복량을 지닌다.\n인간은 배울 수 없는 땅의 대마도를 배울 수 있다.,Teemole
+40007,Desc_FireSword,공격 속성을 (화)로 변경,AttackElement = Fire
+40008,Desc_FireArmor,방어 속성을 (화)로 변경,DefenceElement = Fire
+40009,Desc_SetItem01,세트 아이템01 설명,SetItem01
+40010,Desc_Double,1회에 한하여 다음 사용할 마법의 타수를 2배로 늘린다.,Desc_Double
+40011,Desc_Triple,1회에 한하여 다음 사용할 마법의 타수를 3배로 늘린다.,Desc_Triple
+40012,Desc_Maximize,1회에 한하여 다음 사용할 마법의 랜덤타격치를 최대치로 고정한다.,Desc_Maximize
+40013,Desc_MagicFixedDamage,1회에 한하여 다음 사용할 마법이 마법방어력을 무시한다.,Desc_MagicFixedDamage
+40014,Desc_WearedFall,적 1인에게 속성과 마법방어력을 무시하는 마법대미지를 가한다.,Desc_WearedFall
+40015,Desc_AdvancedWater,수속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedWater
+40016,Desc_AdvancedWind,풍속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedWind
+40017,Desc_AdvancedEarth,땅속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedEarth
+40018,Desc_AdvancedFire,화속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedFire
+40019,Desc_AdvancedPoison,독속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedPoison
+40020,Desc_AdvancedIce,얼음속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedIce
+40021,Desc_AdvancedLightning,번개속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedLightning
+40022,Desc_AdvancedLight,빛속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedLight
+40023,Desc_AdvancedDark,어둠속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedDark
+40024,Desc_AdvancedAll,모든속성의 공격을 강화하고 내성을 획득한다.,Desc_AdvancedAll
+90000,Log_AddStat,{0}스탯이 1 증가하였습니다.,{0}Stat +1
+90001,Log_SkillRange,스킬({0})의 범위 안에 유효한 타겟이 없습니다.,Log_SkillRange {0}
+90002,Log_Damage,{0}가 {1}의 피해를 입었다.,Log_Damage {0} {1}
+90003,Log_Buff,{0}이 축복을 받았다.,Log_Buff {0}
+90004,Log_Debuff,{0}이 저주를 받았다.,Log_Debuff {0}
+90005,Log_EnemyDeath,{0}를 처치하여 Exp {1}과 Gold {2}을 획득하였습니다.,Log_EnemyDeath {0} {1} {2}
+90006,Log_LevelUp,레벨이 {0} -> {1}로 올랐습니다!,LevelUp {0} -> {1}
+90007,Log_MaxLevel,최고 레벨 {0}에 도달하였습니다.,MaxLevel {0}!
+90008,Log_Equip,{0}가 {1}를 장착했다.,{0}'s Equip {1}
+90009,Log_Unequip,{0}가 {1}를 해제했다.,{0}'s Unequip {1}
+90010,Log_SetEquip,{0}가 세트아이템 {1}를 장착했다.,{0}'s SetItem Equip {1}
+90011,Log_SetUnequip,{0}가 세트아이템 {1}를 해제했다.,{0}'s SetItem Unequip {1}
+90012,Log_SkillMana,플레이어의 마나가 부족하여 {0} 스킬을 사용하지 못했습니다.,Mana Shortage {0}!
+90013,Log_AddMaterialItem,잡템({0}) {1}개 획득,Add Etcitem({0}) qty:{1)}
+90014,Log_AddEquipItem,장비({0}) {1}등급 획득,Add (1)Grade EquipItem({0})
+90015,Log_SkillRangeShort,플레이어 {0} 스킬의 사정거리를 벗어났습니다.,Player {0} Skill Range Shortage!
+90016,Log_SkillCooltime,플레이어 {0} 스킬이 아직 충전이 완료되지 않았습니다.,Player {0} Skill Cooltime Shortage!
+90017,Log_SummonSkillCount,{0} 스킬의 소환 제한을 넘어섰습니다.,{0} SummonSkill Count Over!

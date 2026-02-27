@@ -17,10 +17,7 @@ using Random = UnityEngine.Random;
 public class CustomWindow : EditorWindow
 {
     private Vector2 ScrollPosition { get; set; }
-    private string CodeName { get; set; }
-    private int Count { get; set; }
     private Vector2 Position { get; set; }
-
 
     [MenuItem("CustomWindow/Open Window %#q")]
     static void OpenWindow()
@@ -73,25 +70,24 @@ public class CustomWindow : EditorWindow
 
         Time.timeScale = EditorGUILayout.Slider(new GUIContent("TimeScale", $"인게임의 속도를 조절한다.(0~10)"), Time.timeScale, 0f, 10f);
 
-        //if (GUILayout.Button("Save SaveFile", GUILayout.ExpandWidth(false)))
-        //    GameManager.Instance.Save();
+        if (GUILayout.Button("Save SaveFile", GUILayout.ExpandWidth(false)))
+            GameManager.Instance.Save();
 
-        //if (GUILayout.Button("Load SaveFile", GUILayout.ExpandWidth(false)))
-        //    GameManager.Instance.Load();
+        if (GUILayout.Button("Load SaveFile", GUILayout.ExpandWidth(false)))
+            GameManager.Instance.Load();
 
-        //if (GUILayout.Button("Remove SaveFile", GUILayout.ExpandWidth(false)))
-        //    Remove();
+        EditorGUILayout.Space(10f);
 
-        //EditorGUILayout.Space(10f);
+        if (GUILayout.Button("Capture", GUILayout.ExpandWidth(false)))
+            CaptureImage();
 
-        //if (GUILayout.Button("Capture", GUILayout.ExpandWidth(false)))
-        //    CaptureImage();
+        if (GUILayout.Button("Go to CaptureFolder", GUILayout.ExpandWidth(false)))
+            GotoCaptureFolder();
 
-        //if (GUILayout.Button("Go to CaptureFolder", GUILayout.ExpandWidth(false)))
-        //    GotoCaptureFolder();
+        if (GUILayout.Button("Go to BuildFolder", GUILayout.ExpandWidth(false)))
+            GotoBuildFolder();
 
-        //if (GUILayout.Button("Go to BuildFolder", GUILayout.ExpandWidth(false)))
-        //    GotoBuildFolder();
+        EditorGUILayout.Space(10f);
 
         GUILayout.EndScrollView();
     }

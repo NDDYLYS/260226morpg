@@ -439,6 +439,22 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 1661619996}
+    - target: {fileID: 3953739847637853766, guid: ea03aa197fdd3e444a0ed30eebfe3836, type: 3}
+      propertyPath: m_text
+      value: "\uBD88\uB7EC\uC624\uAE30"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953739847637853766, guid: ea03aa197fdd3e444a0ed30eebfe3836, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a291a9af790368543bcf2a086da819ab, type: 2}
+    - target: {fileID: 3953739847637853766, guid: ea03aa197fdd3e444a0ed30eebfe3836, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8125814328368799374, guid: a291a9af790368543bcf2a086da819ab, type: 2}
+    - target: {fileID: 3953739847637853766, guid: ea03aa197fdd3e444a0ed30eebfe3836, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6081215146604387080, guid: ea03aa197fdd3e444a0ed30eebfe3836, type: 3}
       propertyPath: m_Name
       value: SaveLoadPage

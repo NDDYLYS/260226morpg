@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3cc1ab8f0a3071b49883d75791db4d8d
+guid: 84862fa2756255e4583c830eb4f82395
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,9 +9,8 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Maplestory
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 81d7c8beb9c67df4eace4087428235a6, type: 3}
+  - Noto Sans KR
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

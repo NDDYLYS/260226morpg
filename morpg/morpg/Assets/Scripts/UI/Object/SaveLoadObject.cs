@@ -6,11 +6,14 @@ using TMPro;
 
 public class SaveLoadObject : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI index;
     [SerializeField] private TextMeshProUGUI temp;
     [SerializeField] private TextMeshProUGUI playTIme;
 
-    public void SettingUI(SaveData _saveData) 
+    public void SettingUI(SaveData _saveData, int _index) 
     {
+        index.text = _index.ToString();
+
         if (_saveData == null)
             return;
 

@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 
 
-[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class LocalizeText : MonoBehaviour
 {
     public string Codename;

@@ -70,8 +70,6 @@ public class LocalManager : MonoBehaviour
 
         TableDataManager.Instance.SettingLanguage(Language);
         TableDataManager.Instance.ResourcesTableLoad();
-
-        GameManager.Instance.Initialize();
         
         //string scene = string.Empty;
         //if (GameManager.Instance.SaveData.InstantDungeon == null)

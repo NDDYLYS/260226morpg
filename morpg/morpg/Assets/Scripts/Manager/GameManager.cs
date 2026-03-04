@@ -19,13 +19,6 @@ public class GameManager : SingletonGameObject<GameManager>
         set { currentScene = value; }
     }
 
-    [SerializeField] private GameState gameState;
-    public GameState GameState
-    {
-        get { return gameState; }
-        set { gameState = value; }
-    }
-
     public SaveData SaveData { get; set; }
     private string Path { get; set; }
 
@@ -34,94 +27,14 @@ public class GameManager : SingletonGameObject<GameManager>
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        GameState = GameState.None;
-
-        Path = string.Format("{0}/SaveData.dat", Application.persistentDataPath); // "F:/UnityProject/Roguelike/Assets/SaveData.dat"
     }
-
-    public void Initialize()
-    {
-        Load();
-        //ChangedGameState(GameState.Ready);
-    }
-    
-    public void ChangedGameState(GameState _state, bool _isFirst = true)
-    {
-        GameState = _state;
-
-        //switch (GameState)
-        //{
-        //    case GameState.Ready:
-        //        break;
-        //    case GameState.Pause:
-        //        break;
-        //    case GameState.Play:
-        //        // 마을과 매 챕터의 첫번째 방에서 호출한다
-        //        if (_isFirst)
-        //        {
-        //            OccurEvent(EventKind.GameStart);
-        //            AllTurn(true);
-        //        }
-        //        break;
-        //}
-    }
-
+  
     public void OccurEvent(EventKind _event)
     {
         if (EventAction != null)
             EventAction(_event);
 
         LogManager.Instance.DebugLogCategory(LogCategoryEnum.UI, string.Format("OccurEvent!!! {0}", _event.ToString()));
-    }
-
-    public void Save()
-    {
-        //var b = new BinaryFormatter();
-        //Stream stream = new FileStream(Path, FileMode.Create, FileAccess.Write);
-        //if (stream != null)
-        //{
-        //    if (SaveData != null && SaveData.InstantDungeon != null && Player != null)
-        //        SaveData.InstantDungeon.Character = Player.CharacterStruct;
-        //    b.Serialize(stream, SaveData);
-        //    stream.Close();
-        //    LogManager.Instance.DebugLogCategory(LogCategoryEnum.UI, "세이브파일을 저장했습니다.");
-        //}
-    }
-
-    //public void Remove()
-    //{
-    //    string path = string.Format("{0}/SaveData.dat", Application.persistentDataPath);
-    //    if (File.Exists(path))
-    //    {
-    //        LogManager.Instance.DebugLogCategory(LogCategoryEnum.UI, "세이브파일을 삭제했습니다.");
-    //        File.Delete(path);
-    //    }
-    //}
-
-    public void Load()
-    {
-        //if (File.Exists(Path))
-        //{
-        //    Stream stream = new FileStream(Path, FileMode.Open, FileAccess.Read);
-        //    if (stream != null)
-        //    {
-        //        var b = new BinaryFormatter();
-        //        SaveData = b.Deserialize(stream) as SaveData;
-        //        SaveData = SaveData.Reset();
-        //        LogManager.Instance.DebugLogCategory(LogCategoryEnum.UI, "세이브파일을 불러왔습니다.");
-        //    }
-        //}
-        //else
-        //{
-        //    InitSaveData();
-        //    Save();
-        //    LogManager.Instance.DebugLogCategory(LogCategoryEnum.UI, "세이브파일이 존재하지 않아 새로 생성했습니다.");
-        //}
-    }
-
-    public void InitSaveData()
-    {
-        SaveData = new SaveData();
     }
 
     public void GenerateToast(string _message)

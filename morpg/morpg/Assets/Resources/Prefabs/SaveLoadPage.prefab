@@ -572,8 +572,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uBD88\uB7EC\uC624\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: feda95ddacf6b0440b2cc53dcd2153d7, type: 2}
-  m_sharedMaterial: {fileID: 4550162074760140891, guid: feda95ddacf6b0440b2cc53dcd2153d7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a291a9af790368543bcf2a086da819ab, type: 2}
+  m_sharedMaterial: {fileID: -8125814328368799374, guid: a291a9af790368543bcf2a086da819ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -948,7 +948,7 @@ MonoBehaviour:
   scrollRect: {fileID: 6193808779956372770}
   content: {fileID: 6304016398208074772}
   text: {fileID: 3953739847637853766}
-  prefab: {fileID: 1728404504414793954}
+  prefab: {fileID: 9008041740940708602}
 --- !u!1 &6081349900370916696
 GameObject:
   m_ObjectHideFlags: 0

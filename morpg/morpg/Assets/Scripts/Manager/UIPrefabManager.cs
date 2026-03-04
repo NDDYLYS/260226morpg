@@ -33,8 +33,8 @@ public class UIPrefabManager : SingletonGameObject<UIPrefabManager>
 
     public GameObject GetPrefab(string _path, Transform _parent = null, bool _isAssetBundle = false)
     {
-        GameObject prefab = TableDataManager.Instance.GetLoadedPrefab(_path, _isAssetBundle);
-        GameObject obj = Util.CreateObject(prefab, (_parent == null) ? Root : _parent, Vector3.zero, Vector3.one);
+        var prefab = TableDataManager.Instance.GetLoadedPrefab(_path, _isAssetBundle);
+        var obj = Util.CreateObject(prefab, (_parent == null) ? Root : _parent, Vector3.zero, Vector3.one);
         return obj;
     }
 

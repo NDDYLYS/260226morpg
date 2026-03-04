@@ -70,14 +70,6 @@ public class CustomWindow : EditorWindow
 
         Time.timeScale = EditorGUILayout.Slider(new GUIContent("TimeScale", $"인게임의 속도를 조절한다.(0~10)"), Time.timeScale, 0f, 10f);
 
-        if (GUILayout.Button("Save SaveFile", GUILayout.ExpandWidth(false)))
-            GameManager.Instance.Save();
-
-        if (GUILayout.Button("Load SaveFile", GUILayout.ExpandWidth(false)))
-            GameManager.Instance.Load();
-
-        EditorGUILayout.Space(10f);
-
         if (GUILayout.Button("Capture", GUILayout.ExpandWidth(false)))
             CaptureImage();
 

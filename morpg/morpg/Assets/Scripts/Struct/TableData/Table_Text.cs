@@ -5,7 +5,6 @@ public class Table_Text
 	public int Index ;
 	public string CodeName ;
 	public string Korean ;
-	public string English ;
 
 
 	public static void AutoLoadTable()
@@ -24,7 +23,6 @@ public class Table_Text
 			newData.Index = int.Parse(_data[i, columnCount++]);
 			newData.CodeName = _data[i, columnCount++];
 			newData.Korean = _data[i, columnCount++];
-			newData.English = _data[i, columnCount++];
 			TableDataManager.Instance.SetDictinary<Table_Text>(newData.Index, newData.CodeName, newData);
 		}
 	}

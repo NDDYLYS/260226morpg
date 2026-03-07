@@ -27,7 +27,7 @@ public class MessageBox : EventProcessor
     public TextMeshProUGUI TwoCancel;
 
     private Table_MessageBox Table_MessageBox { get; set; }
-    
+
     public void OnClickOpenPageButton(string _codename, CallbackMethod _click, params string[] _parameters)
     {
         Table_MessageBox messageBox = TableDataManager.Instance.GetTableData<Table_MessageBox>(_codename);

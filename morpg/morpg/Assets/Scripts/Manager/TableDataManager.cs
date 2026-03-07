@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using UnityEngine;
+﻿using ExcelDataReader;
 using System;
-
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using UnityEngine;
 
 
 
@@ -41,9 +41,28 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
         TextAsset[] textAssets = Resources.LoadAll<TextAsset>(string.Format("TableData/"));
         for (int i = 0; i < textAssets.Length; i++)
         {
-            Type type = Type.GetType(textAssets[i].name);
-            MethodInfo info = type.GetMethod("AutoLoadTable");
-            
+            //Type type = Type.GetType(textAssets[i].name);
+            //MethodInfo info = type.GetMethod("AutoLoadTable");
+
+            //if (info != null)
+            //    info.Invoke(null, null);
+
+            string typeName = textAssets[i].name;
+
+            Type type = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .FirstOrDefault(t => t.Name == typeName);
+
+            if (type == null)
+            {
+                Debug.LogWarning($"Type not found: {typeName}");
+                continue;
+            }
+
+            MethodInfo info = type.GetMethod("AutoLoadTable",
+                BindingFlags.Public | BindingFlags.Static);
+
             if (info != null)
                 info.Invoke(null, null);
         }
@@ -114,8 +133,6 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
 
         if (Language == SystemLanguage.Korean)
             return text.Korean;
-        else if (Language == SystemLanguage.English)
-            return text.English;
 
         return string.Format("None Text({0})", _codename);
     }
@@ -268,20 +285,42 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
         return prefabs;
     }
 
-    public string[,] PublicExcelReader(string _csvFileName, bool _isResource = false)
+    public string[,] PublicExcelReader(string _bytesFileName, bool _isResource = false)
     {
         string content = string.Empty;
         if (!_isResource)
         {
             string bundleName = "tabledata";
-            string bundlePath = string.Format("Assets/AssetBundle/TableData/{0}.csv", _csvFileName);
-            TextAsset csvFile = LoadAsset<TextAsset>(bundleName, bundlePath);
-            content = csvFile.text;
+            string bundlePath = string.Format("Assets/AssetBundle/TableData/{0}.bytes", _bytesFileName);
+            TextAsset bytesFile = LoadAsset<TextAsset>(bundleName, bundlePath);
+            content = bytesFile.text;
         }
         else
         {
-            TextAsset csvFile = Resources.Load<TextAsset>(string.Format("TableData/{0}", _csvFileName));
-            content = csvFile.text;
+            TextAsset bytesFile = Resources.Load<TextAsset>(string.Format("TableData/{0}", _bytesFileName));
+
+            using (var stream = new MemoryStream(bytesFile.bytes))
+            using (var reader = ExcelReaderFactory.CreateReader(stream))
+            {
+                var dataSet = reader.AsDataSet();
+                var table = dataSet.Tables[0];
+
+                int rowCount = table.Rows.Count;
+                int colCount = table.Columns.Count;
+
+                string[,] result = new string[rowCount, colCount];
+
+                for (int r = 0; r < rowCount; r++)
+                {
+                    for (int c = 0; c < colCount; c++)
+                    {
+                        object value = table.Rows[r][c];
+                        result[r, c] = value?.ToString() ?? "";
+                    }
+                }
+
+                return result;
+            }
         }
 
         return Util.PublicExcelReader(content);

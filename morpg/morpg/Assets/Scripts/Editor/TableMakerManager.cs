@@ -10,12 +10,16 @@ public class TableMakerManager
     static void CreateTableStructForAssetBundle()
     {
         CreateTableStruct(GetBundleFolderPath());
+
+        CopyAll();
     }
 
     [MenuItem("TableMakerManager/Create TableStruct/ForResources")]
     static void CreateTableStructForResources()
     {
         CreateTableStruct(GetResourcesFolderPath(), true);
+
+        CopyAll();
     }
 
     private static void CreateTableStruct(string _path, bool _isResource = false)
@@ -25,11 +29,16 @@ public class TableMakerManager
         List<string> filesPath = GetTableDataList(_path);
         for (int i = 0; i < filesPath.Count; i++)
         {
-            string tableName = filesPath[i].Replace(".csv", "");
+            // 260307 xlsx 불러오는 기능으로 확장
+            //string tableName = filesPath[i].Replace(".csv", "");
+            string tableName = Path.GetFileNameWithoutExtension(filesPath[i]);
 
             string filePath = string.Format("{0}/{1}", _path, filesPath[i]);
-            string text = Util.LoadFile(filePath, Encoding.Unicode);
-            string[,] array = Util.PublicExcelReader(text);
+            
+            // 260307 xlsx 불러오는 기능으로 확장
+            //string text = Util.LoadFile(filePath, Encoding.Unicode);
+            //string[,] array = Util.PublicExcelReader(text);
+            string[,] array = ExcelUtil.ReadXlsx(filePath);
 
             List<string> completeStruct = new List<string>();
             completeStruct.Add(string.Format(""));
@@ -317,7 +326,9 @@ public class TableMakerManager
         List<string> filesPath = new List<string>();
         for (int i = 0; i < files.Length; i++)
         {
-            if (!files[i].Name.Contains(".meta"))
+            // 260307 xlsx 불러오는 기능으로 확장
+            // if (!files[i].Name.Contains(".meta"))
+            if (files[i].Extension == ".xlsx")
             {
                 filesPath.Add(files[i].Name);
             }
@@ -333,7 +344,7 @@ public class TableMakerManager
     /// <returns></returns>
     private static string GetBundleFolderPath()
     {
-        return Path.GetFullPath("../Roguelike/Assets/AssetBundle/TableData");
+        return Path.GetFullPath("../morpg/Assets/AssetBundle/TableData");
     }
 
     /// <summary>
@@ -342,7 +353,7 @@ public class TableMakerManager
     /// <returns></returns>
     private static string GetResourcesFolderPath()
     {
-        return Path.GetFullPath("../Roguelike/Assets/Resources/TableData");
+        return Path.GetFullPath("../morpg/Assets/TableData");
     }
 
     /// <summary>
@@ -351,7 +362,7 @@ public class TableMakerManager
     /// <returns></returns>
     private static string GetStructPath()
     {
-        return Path.GetFullPath("../Roguelike/Assets/Scripts/Struct/TableData");
+        return Path.GetFullPath("../morpg/Assets/Scripts/Struct/TableData");
     }
 
     public static void ClearConsole()
@@ -360,5 +371,34 @@ public class TableMakerManager
         //Type log = assembly.GetType("UnityEditorInternal.LogEntries");
         //MethodInfo clear = log.GetMethod("Clear");
         //clear.Invoke(new object(), null);
+    }
+
+    public static void CopyAll()
+    {
+        string sourceFolder = "Assets/TableData";
+        string targetFolder = "Assets/Resources/TableData";
+
+        if (!Directory.Exists(sourceFolder))
+        {
+            Debug.LogError("Source 폴더가 없습니다: " + sourceFolder);
+            return;
+        }
+
+        if (!Directory.Exists(targetFolder))
+        {
+            Directory.CreateDirectory(targetFolder);
+        }
+
+        string[] files = Directory.GetFiles(sourceFolder, "*.xlsx", SearchOption.TopDirectoryOnly);
+
+        foreach (var file in files)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(file);
+            string targetPath = Path.Combine(targetFolder, fileName + ".bytes");
+
+            File.Copy(file, targetPath, true);
+        }
+
+        AssetDatabase.Refresh();
     }
 }

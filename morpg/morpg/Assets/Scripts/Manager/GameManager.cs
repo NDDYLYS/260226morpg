@@ -20,7 +20,6 @@ public class GameManager : SingletonGameObject<GameManager>
     }
 
     public SaveData SaveData { get; set; }
-    private string Path { get; set; }
 
     private List<EventProcessor> UIList = new List<EventProcessor>();
 
@@ -90,4 +89,33 @@ public class GameManager : SingletonGameObject<GameManager>
             //}
         }
     }
+
+    /// <summary>
+    /// 씬 이동
+    /// </summary>
+    /// <param name="_scene"></param>
+    public void MovingScene(string _scene)
+    {
+        StartCoroutine(LoadAsynchronously(_scene));
+    }
+
+    private IEnumerator LoadAsynchronously(string sceneIndex)
+    {
+        ClearUI();
+        CurrentScene = sceneIndex;
+        AsyncOperation operation = SceneManager.LoadSceneAsync(CurrentScene);
+
+        //loadingScreen.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+
+            //slider.value - progress;
+            //text.text = progress * 100f;
+
+            yield return null;
+        }
+    }
+
 }

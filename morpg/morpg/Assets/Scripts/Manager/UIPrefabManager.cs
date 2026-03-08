@@ -7,6 +7,7 @@ public class UIPrefabManager : SingletonGameObject<UIPrefabManager>
     private Transform Root { get; set; }
     private Transform Dimmed { get; set; }
     
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

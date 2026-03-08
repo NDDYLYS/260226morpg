@@ -46,12 +46,16 @@ public class SaveLoadPage : EventProcessor
         SaveData save = new SaveData();
 
         var slot = Constant.dataSlot;
-        var obj = Util.CreateObject(prefab, content, Vector2.zero, Vector2.one);
-        obj.SetActive(true);
 
-        var saveload = obj.GetComponent<SaveLoadObject>();
-        saveload.SettingUI(null, 0);
-        objects.Add(saveload);
+        for (var i = 0; i < slot; i++) 
+        {
+            var obj = Util.CreateObject(prefab, content, Vector2.zero, Vector2.one);
+            obj.SetActive(true);
+
+            var saveload = obj.GetComponent<SaveLoadObject>();
+            saveload.SettingUI(i+1);
+            objects.Add(saveload);
+        }
     }
 
     public void OnClickClosePageButton()

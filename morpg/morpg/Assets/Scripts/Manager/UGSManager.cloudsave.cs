@@ -14,16 +14,29 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
 {
     public async void Save(int _index)
     {
-        //await CloudSaveService.Instance.Data.Player.SaveAsync(
-        //    new Dictionary<string, object>
-        //    {
-        //        { $"PLAYER_SAVE_{_index}", saveData }
-        //    }
-        //);
+        if (_index <= 0)
+            return;
+        if (Constant.dataSlot < _index)
+            return;
+
+        var saveData = GameManager.Instance.SaveData;
+
+        await CloudSaveService.Instance.Data.Player.SaveAsync(
+            new Dictionary<string, object>
+            {
+                { $"PLAYER_SAVE_{_index}", saveData }
+            }
+        );
     }
 
-    public async Task Load(int _index)
+    public async Task<SaveData> Load(int _index)
     {
+        if (_index <= 0)
+            return null;
+        if (Constant.dataSlot < _index)
+            return null;
+
+
         var keys = new HashSet<string> { $"PLAYER_SAVE_{_index}" };
 
         var result =
@@ -31,28 +44,10 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
 
         if (!result.ContainsKey($"PLAYER_SAVE_{_index}"))
         {
-            Debug.Log("저장 데이터 없음");
-            return;
+            //Debug.Log("저장 데이터 없음");
+            return null;
         }
 
-        // = result[$"PLAYER_SAVE_{_index}"].Value.GetAs<SaveData>();
+        return result[$"PLAYER_SAVE_{_index}"].Value.GetAs<SaveData>();
     }
-
-    //public async Task<SaveData> GetGold(int slotIndex)
-    //{
-    //    string key = $"PLAYER_SAVE_{slotIndex}";
-    //    var keys = new HashSet<string> { key };
-
-    //    var result = await CloudSaveService.Instance.Data.Player.LoadAsync(keys);
-
-    //    if (!result.ContainsKey(key))
-    //    {
-    //        Debug.Log("not SaveData");
-    //        return null;
-    //    }
-
-    //    var save = result[key].Value.GetAs<SaveData>();
-    //    Debug.Log($"{slotIndex}_Gold : " + save.gold);
-    //    return save;
-    //}
 }

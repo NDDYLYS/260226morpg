@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class StartManager : MonoBehaviour
 {
+    private void Awake()
+    {
+        UGSManager.Instance.create();
+    }
+
     public void onClickNewGameButton() 
     { 
+        GameManager.Instance.SaveData = new SaveData();
+        GameManager.Instance.MovingScene("2Village");
+        
     }
 
     public void onClickContinueButton() 

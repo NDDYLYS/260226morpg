@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 
 public partial class UGSManager : SingletonGameObject<UGSManager>
 {
+    public void create() 
+    {
+    }
+    
     async void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -34,7 +38,7 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         // 4️⃣ 애널리틱스 시작
         AnalyticsService.Instance.StartDataCollection();
 
-        Debug.Log("UGS Analytics Ready");
+        //Debug.Log("UGS Analytics Ready");
 
         Debug.Log("UGS All Ready");
     }
@@ -47,8 +51,8 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
             {
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-                // AuthenticationService.Instance.SignInAnonymouslyAsync(); 기기별 로그인
-                AuthenticationService.Instance.LinkWithSteamAsync("480");
+                AuthenticationService.Instance.SignInAnonymouslyAsync();
+                //AuthenticationService.Instance.LinkWithSteamAsync("480");
                 // AuthenticationService.Instance.LinkWithGoogleAsync();
                 // AuthenticationService.Instance.LinkWithAppleAsync();
             }
@@ -62,7 +66,7 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
             }
         }
 
-        //Debug.Log("PlayerId: " + AuthenticationService.Instance.PlayerId);
+        LocalManager.Instance.playerId = AuthenticationService.Instance.PlayerId;
     }
 
 }

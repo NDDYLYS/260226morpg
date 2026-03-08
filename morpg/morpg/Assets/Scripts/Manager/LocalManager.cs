@@ -36,6 +36,8 @@ public class LocalManager : MonoBehaviour
     
     public string AppPackageName;
 
+    public string playerId;
+
     void Awake()
     {
         DontDestroyOnLoad(this);

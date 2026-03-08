@@ -10,14 +10,19 @@ public class SaveLoadObject : MonoBehaviour
     [SerializeField] private TextMeshProUGUI temp;
     [SerializeField] private TextMeshProUGUI playTIme;
 
-    public void SettingUI(SaveData _saveData, int _index) 
+    public void SettingUI(int _index) 
     {
         index.text = _index.ToString();
 
-        if (_saveData == null)
-            return;
-
-        temp.text = _saveData.temp;
-        playTIme.text = Util.GetTimer(_saveData.playTime);
+        //if (save == null)
+        //{
+        //    temp.text = "notSaveData".GetTableText();
+        //    playTIme.text = string.Empty;
+        //}
+        //else 
+        //{ 
+        //    temp.text = save.temp;
+        //    playTIme.text = Util.GetTimer(save.playTime);
+        //}
     }
 }

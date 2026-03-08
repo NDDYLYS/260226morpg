@@ -19,6 +19,9 @@ public class CustomWindow : EditorWindow
     private Vector2 ScrollPosition { get; set; }
     private Vector2 Position { get; set; }
 
+    private int index { get; set; }
+
+
     [MenuItem("CustomWindow/Open Window %#q")]
     static void OpenWindow()
     {
@@ -67,6 +70,16 @@ public class CustomWindow : EditorWindow
         EditorGUILayout.InspectorTitlebar(true, this);
 
         ScrollPosition = GUILayout.BeginScrollView(ScrollPosition);
+
+        index = EditorGUILayout.IntField("index : ", index, GUILayout.ExpandWidth(true));
+
+        if (GUILayout.Button("Load", GUILayout.ExpandWidth(false)))
+            UGSManager.Instance.Load(index);
+
+        if (GUILayout.Button("Save", GUILayout.ExpandWidth(false)))
+            UGSManager.Instance.Save(index);
+
+        EditorGUILayout.Space(10f);
 
         Time.timeScale = EditorGUILayout.Slider(new GUIContent("TimeScale", $"인게임의 속도를 조절한다.(0~10)"), Time.timeScale, 0f, 10f);
 
@@ -117,15 +130,5 @@ public class CustomWindow : EditorWindow
             Directory.CreateDirectory(Path.GetFullPath(folderName));
 
         Process.Start(folderName);
-    }
-
-    private void Remove()
-    {
-        string path = string.Format("{0}/SaveData.dat", Application.persistentDataPath);
-        if (File.Exists(path))
-        {
-            Debug.Log("세이브파일을 삭제했습니다.");
-            File.Delete(path);
-        }
     }
 }

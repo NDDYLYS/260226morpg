@@ -9,8 +9,8 @@ using TMPro;
 //{
 //    if (click == MessageBoxClick.Confirm)
 //    {
-//        MovingScene("4EventScene");
 //    }
+//        MovingScene("4EventScene");
 //}, EventType.ToString(), EventType.ToString());
 
 public class MessageBox : EventProcessor

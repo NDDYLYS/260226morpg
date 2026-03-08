@@ -25,7 +25,11 @@ public class SaveLoadPage : EventProcessor
 
     private void settingUI() 
     {
-        objects.Clear();
+        if (objects == null)
+            objects = new List<SaveLoadObject>();
+        else 
+            objects.Clear();
+
         if (1 <= content.transform.childCount)
         {
             var children = content.GetComponentsInChildren<Transform>();

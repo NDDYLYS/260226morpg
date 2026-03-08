@@ -25,9 +25,33 @@ public class UIPrefabManager : SingletonGameObject<UIPrefabManager>
         get
         {
             if (MessageBox == null)
-                MessageBox = GetPrefab("UI/MessageBox").GetComponent<MessageBox>();
+                MessageBox = GetPrefab("UIs/MessageBox").GetComponent<MessageBox>();
             MessageBox.transform.SetAsLastSibling();
             return MessageBox;
+        }
+    }
+
+    private OptionPage OptionPage { get; set; }
+    public OptionPage OptionPageProperty
+    {
+        get
+        {
+            if (OptionPage == null)
+                OptionPage = GetPrefab("UIs/OptionPage").GetComponent<OptionPage>();
+            OptionPage.transform.SetAsLastSibling();
+            return OptionPage;
+        }
+    }
+
+    private SaveLoadPage SaveLoadPage { get; set; }
+    public SaveLoadPage SaveLoadPageProperty
+    {
+        get
+        {
+            if (SaveLoadPage == null)
+                SaveLoadPage = GetPrefab("UIs/SaveLoadPage").GetComponent<SaveLoadPage>();
+            SaveLoadPage.transform.SetAsLastSibling();
+            return SaveLoadPage;
         }
     }
 

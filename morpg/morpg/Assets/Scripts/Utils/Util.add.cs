@@ -2,8 +2,8 @@
 
 public static partial class Util
 {
-    public static void Add()
-    {
-        
-    }
+    //public static void CreateMessageBox(string _codename)
+    //{
+    //    var prefab = UIPrefabManager.Instance.MessageBoxProperty.OnClickOpenPageButton(_codename);
+    //}
 }

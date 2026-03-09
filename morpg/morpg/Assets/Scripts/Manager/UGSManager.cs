@@ -38,7 +38,8 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         // 4️⃣ 애널리틱스 시작
         AnalyticsService.Instance.StartDataCollection();
 
-        //Debug.Log("UGS Analytics Ready");
+        await refreshSaveData();
+        StartManager.Instance.refreshContinueBtn();
 
         Debug.Log("UGS All Ready");
     }

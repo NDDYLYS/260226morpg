@@ -4,9 +4,27 @@ using UnityEngine;
 
 public class StartManager : MonoBehaviour
 {
+    private static StartManager _Instance = null;
+    public static StartManager Instance
+    {
+        get
+        {
+            if (_Instance == null)
+                _Instance = FindObjectOfType(typeof(StartManager)) as StartManager;
+            return _Instance;
+        }
+    }
+
+    [SerializeField] private GameObject continueBtn;
+
     private void Awake()
     {
         UGSManager.Instance.create();
+    }
+
+    public void refreshContinueBtn() 
+    {
+        continueBtn.SetActive(UGSManager.Instance.getReturnBool());
     }
 
     public void onClickNewGameButton() 

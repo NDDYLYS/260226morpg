@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a43e695fd33c754ea9a6d7b488a0b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  continueBtn: {fileID: 1116895341}
 --- !u!4 &244038183
 Transform:
   m_ObjectHideFlags: 0
@@ -1925,6 +1926,7 @@ MonoBehaviour:
   Language: 23
   IsUseAssetBundle: 0
   AppPackageName: 
+  playerId: 
 --- !u!4 &1985062083
 Transform:
   m_ObjectHideFlags: 0

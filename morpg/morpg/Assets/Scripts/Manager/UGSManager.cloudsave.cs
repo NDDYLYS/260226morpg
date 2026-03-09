@@ -9,9 +9,13 @@ using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 public partial class UGSManager : SingletonGameObject<UGSManager>
 {
+    private Dictionary<int, SaveData> saveDataDics;
+    [SerializeField] private bool returnBool;
+
     public async void Save(int _index)
     {
         if (_index <= 0)
@@ -49,5 +53,39 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         }
 
         return result[$"PLAYER_SAVE_{_index}"].Value.GetAs<SaveData>();
+    }
+
+    public async Task refreshSaveData()
+    {
+        if (saveDataDics == null)
+            saveDataDics = new Dictionary<int, SaveData>();
+        else
+            saveDataDics.Clear();
+
+        returnBool = false;
+
+        var slot = Constant.dataSlot;
+        for (var i = 0; i < slot; i++) 
+        {
+            var keys = new HashSet<string> { $"PLAYER_SAVE_{i}" };
+            var result = await CloudSaveService.Instance.Data.Player.LoadAsync(keys);
+
+            if (!result.ContainsKey($"PLAYER_SAVE_{i}"))
+            {
+                saveDataDics.Add(i, null);
+            }
+            else 
+            {
+                var saveData = result[$"PLAYER_SAVE_{i}"].Value.GetAs<SaveData>();
+                saveDataDics.Add(i, saveData);
+
+                returnBool = true;
+            }
+        }
+    }
+
+    public bool getReturnBool() 
+    {
+        return returnBool;
     }
 }

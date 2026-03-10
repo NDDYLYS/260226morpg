@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using System.Linq;
 
-[Serializable]
+[System.Serializable]
 public class SaveData
 {
     //public string FileName { get; set; } // 저장된 파일명

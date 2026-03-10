@@ -20,6 +20,7 @@ public class StartManager : MonoBehaviour
     private void Awake()
     {
         UGSManager.Instance.create();
+        GameManager.Instance.create();
     }
 
     public void refreshContinueBtn() 
@@ -36,7 +37,7 @@ public class StartManager : MonoBehaviour
 
     public void onClickContinueButton() 
     {
-        UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton();
+        UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton(SaveLoadEnum.Load);
     }
 
     public void onClickOptionButton() 

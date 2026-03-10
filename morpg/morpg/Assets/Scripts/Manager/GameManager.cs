@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Sirenix.OdinInspector;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine.SceneManagement;
-using Sirenix.OdinInspector;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonGameObject<GameManager>
 {
@@ -19,9 +20,13 @@ public class GameManager : SingletonGameObject<GameManager>
         set { currentScene = value; }
     }
 
-    public SaveData SaveData { get; set; }
+    public SaveData SaveData;
 
     private List<EventProcessor> UIList = new List<EventProcessor>();
+
+    public void create()
+    {
+    }
 
     void Awake()
     {

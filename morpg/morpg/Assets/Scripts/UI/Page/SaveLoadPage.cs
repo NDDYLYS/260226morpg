@@ -14,10 +14,13 @@ public class SaveLoadPage : EventProcessor
     [SerializeField] private GameObject prefab;
 
     private List<SaveLoadObject> objects;
+    private SaveLoadEnum saveLoadEnum;
 
-    public void OnClickOpenPageButton()
+    public void OnClickOpenPageButton(SaveLoadEnum _saveLoad)
     {
-        scrollRect.verticalNormalizedPosition = 0;
+        saveLoadEnum = _saveLoad;
+
+        scrollRect.verticalNormalizedPosition = 1;
         base.OpenPage();
 
         settingUI();
@@ -25,6 +28,8 @@ public class SaveLoadPage : EventProcessor
 
     private void settingUI() 
     {
+        text.text = saveLoadEnum.ToString().ToLower().GetTableText();
+
         if (objects == null)
             objects = new List<SaveLoadObject>();
         else 
@@ -53,7 +58,7 @@ public class SaveLoadPage : EventProcessor
             obj.SetActive(true);
 
             var saveload = obj.GetComponent<SaveLoadObject>();
-            saveload.SettingUI(i+1);
+            saveload.SettingUI(i+1, saveLoadEnum);
             objects.Add(saveload);
         }
     }

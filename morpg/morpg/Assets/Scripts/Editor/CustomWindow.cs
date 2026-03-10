@@ -72,12 +72,16 @@ public class CustomWindow : EditorWindow
         ScrollPosition = GUILayout.BeginScrollView(ScrollPosition);
 
         index = EditorGUILayout.IntField("index : ", index, GUILayout.ExpandWidth(true));
+        if (index <= 1)
+            index = 1;
+        if (Constant.dataSlot < index)
+            index = Constant.dataSlot;
 
         if (GUILayout.Button("Load", GUILayout.ExpandWidth(false)))
-            UGSManager.Instance.Load(index);
+            UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton(SaveLoadEnum.Load); //UGSManager.Instance.Load(index);
 
         if (GUILayout.Button("Save", GUILayout.ExpandWidth(false)))
-            UGSManager.Instance.Save(index);
+            UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton(SaveLoadEnum.Save);//UGSManager.Instance.Save(index);
 
         EditorGUILayout.Space(10f);
 

@@ -16,6 +16,16 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
     private Dictionary<int, SaveData> saveDataDics;
     [SerializeField] private bool returnBool;
 
+    public SaveData GetSaveData(int _index)
+    {
+        if (saveDataDics.ContainsKey(_index))
+        {
+            return saveDataDics[_index];
+        }
+
+        return null;
+    }
+
     public async void Save(int _index)
     {
         if (_index <= 0)
@@ -31,14 +41,16 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
                 { $"PLAYER_SAVE_{_index}", saveData }
             }
         );
+
+        refreshSaveData();
     }
 
-    public async Task<SaveData> Load(int _index)
+    public async void Load(int _index)
     {
         if (_index <= 0)
-            return null;
+            return;
         if (Constant.dataSlot < _index)
-            return null;
+            return;
 
 
         var keys = new HashSet<string> { $"PLAYER_SAVE_{_index}" };
@@ -49,10 +61,11 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         if (!result.ContainsKey($"PLAYER_SAVE_{_index}"))
         {
             //Debug.Log("저장 데이터 없음");
-            return null;
+            return;
         }
 
-        return result[$"PLAYER_SAVE_{_index}"].Value.GetAs<SaveData>();
+        var saveData = result[$"PLAYER_SAVE_{_index}"].Value.GetAs<SaveData>();
+        GameManager.Instance.SaveData = saveData;
     }
 
     public async Task refreshSaveData()

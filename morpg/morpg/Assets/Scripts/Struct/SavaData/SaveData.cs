@@ -7,8 +7,8 @@ using System.Linq;
 public class SaveData
 {
     //public string FileName { get; set; } // 저장된 파일명
-    public string temp { get; set; }
-    public long playTime { get; set; }
+    public string temp;
+    public long playTime;
 
 
     public SaveData()

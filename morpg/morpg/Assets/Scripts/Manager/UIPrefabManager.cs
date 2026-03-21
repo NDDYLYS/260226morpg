@@ -56,6 +56,18 @@ public class UIPrefabManager : SingletonGameObject<UIPrefabManager>
         }
     }
 
+    private MenuPage MenuPage { get; set; }
+    public MenuPage MenuPageProperty
+    {
+        get
+        {
+            if (MenuPage == null)
+                MenuPage = GetPrefab("UIs/MenuPage").GetComponent<MenuPage>();
+            MenuPage.transform.SetAsLastSibling();
+            return MenuPage;
+        }
+    }
+
     public GameObject GetPrefab(string _path, Transform _parent = null, bool _isAssetBundle = false)
     {
         var prefab = TableDataManager.Instance.GetLoadedPrefab(_path, _isAssetBundle);

@@ -253,6 +253,13 @@ public partial class Util
         obj.transform.localPosition = _position;
         obj.transform.localScale = _scale;
 
+        var rt = obj.GetComponent<RectTransform>();
+        if (rt != null) 
+        { 
+            rt.offsetMin = _position; // Left, Bottom = 0
+            rt.offsetMax = _position; // Right, Top = 0
+        }
+
         return obj;
     }
 

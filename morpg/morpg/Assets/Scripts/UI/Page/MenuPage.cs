@@ -8,9 +8,14 @@ using TMPro;
 
 public class MenuPage : EventProcessor
 {
+    [SerializeField] private GameObject submenu_option;
+
+    private MenuEnum menuEnum;
+
     public void OnClickOpenPageButton()
     {
         base.OpenPage();
+        OnClickOneButton();
     }
 
     public void OnClickClosePageButton()
@@ -26,13 +31,63 @@ public class MenuPage : EventProcessor
         OnClickClosePageButton();
     }
 
+    private void SettingUI() 
+    {
+        subMenuActive(false);
+
+        switch (menuEnum)
+        {
+            case MenuEnum.One:
+                break;
+            case MenuEnum.Two:
+                break;
+            case MenuEnum.Three:
+                break;
+            case MenuEnum.Option:
+                UIPrefabManager.Instance.OptionPageProperty.OnClickOpenPageButton();
+                break;
+            case MenuEnum.Menu:
+                subMenuActive(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void OnClickOneButton()
+    {
+        menuEnum = MenuEnum.One;
+        SettingUI();
+    }
+
+    public void OnClickTwoButton()
+    {
+        menuEnum = MenuEnum.Two;
+        SettingUI();
+    }
+
+    public void OnClickThreeButton()
+    {
+        menuEnum = MenuEnum.Three;
+        SettingUI();
+    }
+
+
     public void OnClickOptionButton()
     {
-        UIPrefabManager.Instance.OptionPageProperty.OnClickOpenPageButton();
+        menuEnum = MenuEnum.Option;
+        SettingUI();
     }
 
     public void OnClickMenuButton()
     {
+        menuEnum = MenuEnum.Menu;
+        SettingUI();
+    }
+
+    private void subMenuActive(bool _active)
+    {
+        submenu_option.SetActive(_active);
     }
 
     public void OnClickTitleButton() 

@@ -55,3 +55,14 @@ public enum SaveLoadEnum
     Load,
     Max
 }
+
+public enum MenuEnum 
+{
+    None = -1,
+    One,
+    Two,
+    Three,
+    Option,
+    Menu,
+    Max
+}

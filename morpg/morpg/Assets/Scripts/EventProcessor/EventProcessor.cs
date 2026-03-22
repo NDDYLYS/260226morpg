@@ -26,6 +26,10 @@ public class EventProcessor : MonoBehaviour
 
     public virtual void OpenPage(bool _not = false)
     {
+        var contain = GameManager.Instance.ContainUI(this);
+        if (contain)
+            return;
+
         GameManager.Instance.AddUI(this);
         Container.SetActive(true);
 

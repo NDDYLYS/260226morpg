@@ -25,9 +25,6 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (UIPrefabManager.Instance.MenuPageProperty.Container.activeSelf)
-                return;
-
             UIPrefabManager.Instance.MenuPageProperty.OnClickOpenPageButton();
         }
     }

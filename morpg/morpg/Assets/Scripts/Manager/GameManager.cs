@@ -53,6 +53,11 @@ public class GameManager : SingletonGameObject<GameManager>
 #endif
     }
 
+    public bool ContainUI(EventProcessor _ui)
+    {
+        return UIList.Contains(_ui);
+    }
+
     public void AddUI(EventProcessor _ui)
     {
         if (!UIList.Contains(_ui))

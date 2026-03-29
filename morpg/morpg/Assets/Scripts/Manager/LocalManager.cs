@@ -37,6 +37,7 @@ public class LocalManager : MonoBehaviour
     public string AppPackageName;
 
     public string playerId;
+    public string gameName;
 
     void Awake()
     {

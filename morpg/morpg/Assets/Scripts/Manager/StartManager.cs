@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using System.Text;
 
 public class StartManager : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class StartManager : MonoBehaviour
 
     private void Awake()
     {
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
         UGSManager.Instance.create();
         GameManager.Instance.create();
     }

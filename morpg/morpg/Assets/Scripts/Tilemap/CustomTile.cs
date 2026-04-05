@@ -4,5 +4,5 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu]
 public class CustomTile : Tile
 {
-    public bool isWalkable;
+    [SerializeField] private bool isWalkable;
 }

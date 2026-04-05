@@ -66,3 +66,12 @@ public enum MenuEnum
     Menu,
     Max
 }
+
+public enum TilemapEnum
+{
+    None = -1,
+    Move,
+    NotMove,
+    Deco,
+    Max
+}

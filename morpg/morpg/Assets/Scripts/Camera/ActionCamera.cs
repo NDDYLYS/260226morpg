@@ -11,7 +11,7 @@ public class ActionCamera : MonoBehaviour
     {
         if (CameraLookPoint == null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            var player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
                 CameraLookPoint = player.transform;
         }

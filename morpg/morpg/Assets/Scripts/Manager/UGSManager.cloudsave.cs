@@ -66,6 +66,7 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
 
         var saveData = result[$"PLAYER_SAVE_{_index}"].Value.GetAs<SaveData>();
 
+        GameManager.Instance.SetGameState(GameStateEnum.Play);
         GameManager.Instance.SaveData = saveData;
         GameManager.Instance.MovingScene("2Village");
     }

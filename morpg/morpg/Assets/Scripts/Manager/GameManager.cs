@@ -21,6 +21,8 @@ public class GameManager : SingletonGameObject<GameManager>
     }
 
     public SaveData SaveData;
+    public GameStateEnum GameState;
+
 
     private List<EventProcessor> UIList = new List<EventProcessor>();
 
@@ -106,8 +108,19 @@ public class GameManager : SingletonGameObject<GameManager>
     {
         if (SaveData == null)
             return;
-
+        if (EqualsGameState(GameStateEnum.Stop) == true)
+            return;
         SaveData.playTime += Time.fixedDeltaTime;
+    }
+
+    public void SetGameState(GameStateEnum _state)
+    {
+        GameState = _state;
+    }
+
+    public bool EqualsGameState(GameStateEnum _state)
+    {
+        return GameState == _state;
     }
 
     /// <summary>

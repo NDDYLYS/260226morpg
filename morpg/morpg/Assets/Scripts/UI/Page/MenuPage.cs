@@ -8,18 +8,21 @@ using TMPro;
 
 public class MenuPage : EventProcessor
 {
+    [SerializeField] private TextMeshProUGUI playTime;
     [SerializeField] private GameObject submenu_option;
 
     private MenuEnum menuEnum;
 
     public void OnClickOpenPageButton()
     {
+        GameManager.Instance.SetGameState(GameStateEnum.Stop);
         base.OpenPage();
         OnClickOneButton();
     }
 
     public void OnClickClosePageButton()
     {
+        GameManager.Instance.SetGameState(GameStateEnum.Play);
         base.ClosePage();
     }
 
@@ -35,9 +38,11 @@ public class MenuPage : EventProcessor
     {
         subMenuActive(false);
 
+
         switch (menuEnum)
         {
             case MenuEnum.One:
+                playTime.text = Util.GetTimer(GameManager.Instance.SaveData.playTime);
                 break;
             case MenuEnum.Two:
                 break;

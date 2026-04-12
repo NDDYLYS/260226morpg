@@ -75,3 +75,11 @@ public enum TilemapEnum
     Deco,
     Max
 }
+
+public enum GameStateEnum
+{
+    None = -1,
+    Stop,
+    Play,
+    Max
+}

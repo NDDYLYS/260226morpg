@@ -33,7 +33,8 @@ public class StartManager : MonoBehaviour
     }
 
     public void onClickNewGameButton() 
-    { 
+    {
+        GameManager.Instance.SetGameState(GameStateEnum.Play);
         GameManager.Instance.SaveData = new SaveData();
         GameManager.Instance.MovingScene("2Village");
         

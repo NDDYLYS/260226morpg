@@ -1297,6 +1297,7 @@ GameObject:
   - component: {fileID: 6469376038100366387}
   - component: {fileID: 1728404504414793954}
   - component: {fileID: 4546462513836142718}
+  - component: {fileID: 5910169863868392633}
   m_Layer: 5
   m_Name: SaveLoadObject
   m_TagString: Untagged
@@ -1398,3 +1399,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5910169863868392633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9008041740940708602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe47f48d70527464b89a3d0e5076d476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 687393391875876878}

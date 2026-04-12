@@ -239,9 +239,18 @@ public partial class Util
 
     public static string GetTimer(long _time)
     {
-        int second = (int)(_time % 60);
-        int minute = (int)((_time / 60) % 60);
-        int hour = (int)(_time / (60 * 60));
+        var second = (int)(_time % 60);
+        var minute = (int)((_time / 60) % 60);
+        var hour = (int)(_time / (60 * 60));
+
+        return string.Format("{0:00}:{1:00}:{2:00}", hour, minute, second);
+    }
+
+    public static string GetTimer(float _time)
+    {
+        var second = (int)(_time % 60);
+        var minute = (int)((_time / 60) % 60);
+        var hour = (int)(_time / (60 * 60));
 
         return string.Format("{0:00}:{1:00}:{2:00}", hour, minute, second);
     }

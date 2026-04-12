@@ -84,6 +84,8 @@ public class GameManager : SingletonGameObject<GameManager>
 
     private void Update()
     {
+        updatePlayTime();
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (UICount())
@@ -98,6 +100,14 @@ public class GameManager : SingletonGameObject<GameManager>
             //    SkillTargetList = null;
             //}
         }
+    }
+
+    private void updatePlayTime()
+    {
+        if (SaveData == null)
+            return;
+
+        SaveData.playTime += Time.fixedDeltaTime;
     }
 
     /// <summary>

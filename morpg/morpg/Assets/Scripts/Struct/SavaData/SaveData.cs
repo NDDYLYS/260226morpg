@@ -8,12 +8,12 @@ public class SaveData
 {
     //public string FileName { get; set; } // 저장된 파일명
     public string temp;
-    public long playTime;
+    public float playTime;
 
 
     public SaveData()
     {
         temp = "";
-        playTime = 0;
+        playTime = 0f;
     }
 }

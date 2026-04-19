@@ -20,6 +20,7 @@ public class CustomWindow : EditorWindow
     private Vector2 Position { get; set; }
 
     private int index { get; set; }
+    private string textValue { get; set; }
 
 
     [MenuItem("CustomWindow/Open Window %#q")]
@@ -98,8 +99,22 @@ public class CustomWindow : EditorWindow
 
         EditorGUILayout.Space(10f);
 
+        textValue = EditorGUILayout.TextField("text : ", textValue, GUILayout.ExpandWidth(true));
+
+        if (GUILayout.Button("Log", GUILayout.ExpandWidth(false)))
+            Debug.Log(textValue);
+
+        if (GUILayout.Button("LogWarning", GUILayout.ExpandWidth(false)))
+            Debug.LogWarning(textValue);
+
+        if (GUILayout.Button("LogError", GUILayout.ExpandWidth(false)))
+            Debug.LogError(textValue);
+
         GUILayout.EndScrollView();
     }
+
+
+
 
     public void CaptureImage()
     {

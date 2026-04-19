@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 
@@ -26,6 +27,13 @@ public class OptionPage : EventProcessor
     public void OnClickCopyButton() 
     {
         GUIUtility.systemCopyBuffer = LocalManager.Instance.playerId;
+    }
+
+    public void OnClickBugReportFolderButton()
+    {
+        string path = Application.persistentDataPath;
+
+        Process.Start(path);
     }
 
     public override void EscapeKeyDown()

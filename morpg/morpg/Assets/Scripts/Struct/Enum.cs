@@ -83,3 +83,31 @@ public enum GameStateEnum
     Play,
     Max
 }
+
+public enum EncyclopediaEnum
+{
+    None = -1,
+    Cocruwa,
+    Term,
+    History,
+    Max
+}
+
+public enum CocruwaEnum
+{
+    None = -1,
+    Renod,
+    Tartaros,
+    Redinin,
+    Perth,
+    Ehrlone,
+    Gingarsion,
+    GrenFomos,
+    NarosaFomos,
+    IreanSorin,
+    BultonKajon,
+    KaroukWingent,
+    RoutonWinner,
+    GaremenTooskaDin,
+    Max
+}

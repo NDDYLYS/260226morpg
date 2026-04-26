@@ -111,3 +111,44 @@ public enum CocruwaEnum
     GaremenTooskaDin,
     Max
 }
+
+public enum HiddenEnum
+{
+    None = -1,
+    Default,
+    Hidden,
+    Max
+}
+
+public enum SpeciesEnum
+{
+    None = -1,
+    Human,
+    Rodec,
+    Toorka,
+    Teemole,
+    Selena,
+    Badrak,
+    Machine,
+    Sandora,
+    Kalapok,
+    Unknown,
+    Max
+}
+
+public enum JobEnum
+{
+    None = -1, 
+    Warrior,
+    Archer,
+    Mage,
+    Priest,
+    Assasin,
+    Rogue,
+    Summoner,
+    Alchemist,
+    Necromancer,
+    Demon,
+    Archmage,
+    Max
+}

@@ -813,7 +813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\uB3C4\uAC10"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a291a9af790368543bcf2a086da819ab, type: 2}
   m_sharedMaterial: {fileID: -8125814328368799374, guid: a291a9af790368543bcf2a086da819ab, type: 2}
@@ -906,8 +906,9 @@ GameObject:
   - component: {fileID: 2041364546209953499}
   - component: {fileID: 790849588895905906}
   - component: {fileID: 8042775659415896991}
+  - component: {fileID: 304744792920290485}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: species
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1029,6 +1030,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &304744792920290485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273523700260789291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53138afce010c64b9e901870c08d61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Codename: Species
 --- !u!1 &5422059178307047062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,8 +1119,9 @@ GameObject:
   - component: {fileID: 2695643587508379334}
   - component: {fileID: 8261766960464602008}
   - component: {fileID: 8956011796099075366}
+  - component: {fileID: 2196664439722019626}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: job
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1228,6 +1243,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2196664439722019626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500758611734383552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53138afce010c64b9e901870c08d61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Codename: Job
 --- !u!1 &5793679865980777628
 GameObject:
   m_ObjectHideFlags: 0

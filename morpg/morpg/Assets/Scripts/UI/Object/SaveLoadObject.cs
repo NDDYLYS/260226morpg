@@ -24,8 +24,8 @@ public class SaveLoadObject : MonoBehaviour
 
         if (saveData != null)
         {
-            temp.text = saveData.temp;
-            playTIme.text = Util.GetTimer(saveData.playTime);
+            temp.text = "";
+            playTIme.text = Util.GetTimer(saveData.getPlaytime());
         }
         else
         {

@@ -138,7 +138,8 @@ public enum SpeciesEnum
 
 public enum JobEnum
 {
-    None = -1, 
+    None = -1,
+    notEmployed,
     Warrior,
     Archer,
     Mage,

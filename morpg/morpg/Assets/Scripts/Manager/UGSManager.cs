@@ -39,7 +39,9 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         AnalyticsService.Instance.StartDataCollection();
 
         await refreshSaveData();
-        StartManager.Instance.refreshContinueBtn();
+
+        if (StartManager.Instance != null)
+            StartManager.Instance.refreshContinueBtn();
 
         Debug.Log("UGS All Ready");
     }

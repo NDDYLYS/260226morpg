@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Collections.Generic;
+using Unity.Jobs;
 using UnityEditor;
 using UnityEngine;
-
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -21,6 +21,10 @@ public class CustomWindow : EditorWindow
 
     private int index { get; set; }
     private string textValue { get; set; }
+
+    private SpeciesEnum species { get; set; }
+    private JobEnum job { get; set; }
+    private string encyclopedia {  get; set; }
 
 
     [MenuItem("CustomWindow/Open Window %#q")]
@@ -109,6 +113,32 @@ public class CustomWindow : EditorWindow
 
         if (GUILayout.Button("LogError", GUILayout.ExpandWidth(false)))
             Debug.LogError(textValue);
+
+        EditorGUILayout.Space(10f);
+
+        species = (SpeciesEnum)EditorGUILayout.EnumPopup("species : ", species, GUILayout.ExpandWidth(true));
+
+        if (GUILayout.Button("Change Species", GUILayout.ExpandWidth(false)))
+        {
+            if (GameManager.Instance?.SaveData != null)
+                GameManager.Instance.SaveData.species = species;
+        }
+
+        job = (JobEnum)EditorGUILayout.EnumPopup("job : ", job, GUILayout.ExpandWidth(true));
+
+        if (GUILayout.Button("Change Job", GUILayout.ExpandWidth(false)))
+        {
+            if (GameManager.Instance?.SaveData != null)
+                GameManager.Instance.SaveData.job = job;
+        }
+
+        encyclopedia = EditorGUILayout.TextField("encyclopedia : ", encyclopedia, GUILayout.ExpandWidth(true));
+
+        if (GUILayout.Button("Add Encyclopedia", GUILayout.ExpandWidth(false)))
+        {
+            if (GameManager.Instance?.SaveData != null)
+                GameManager.Instance.SaveData.encyclopediaList.Add(encyclopedia);
+        }
 
         GUILayout.EndScrollView();
     }

@@ -42,7 +42,7 @@ public class MenuPage : EventProcessor
         switch (menuEnum)
         {
             case MenuEnum.One:
-                playTime.text = Util.GetTimer(GameManager.Instance.SaveData.getPlaytime());
+                playTime.text = Util.GetTimer(GameManager.Instance.SaveData.playTime);
                 break;
             case MenuEnum.Two:
                 break;

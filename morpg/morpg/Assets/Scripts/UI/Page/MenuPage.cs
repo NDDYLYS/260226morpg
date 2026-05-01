@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 
 
@@ -9,12 +10,19 @@ using TMPro;
 public class MenuPage : EventProcessor
 {
     [SerializeField] private TextMeshProUGUI playTime;
-    [SerializeField] private GameObject submenu_option;
+    [SerializeField] private GameObject submenu;
     [SerializeField] private GameObject equipment_menu;
     [SerializeField] private GameObject speciesjob_menu;
     [SerializeField] private GameObject encyclopedia_menu;
 
+
     private MenuEnum menuEnum;
+    private List<ClickMenu> menuList;
+
+    private void Awake()
+    {
+        menuList = GetComponentsInChildren<ClickMenu>().ToList();
+    }
 
     public void OnClickOpenPageButton()
     {
@@ -42,6 +50,10 @@ public class MenuPage : EventProcessor
         menuHIde();
         subMenuActive(false);
 
+        foreach (var clicked in menuList) 
+        {
+            clicked.menuSelect(menuEnum);
+        }
 
         switch (menuEnum)
         {
@@ -114,7 +126,7 @@ public class MenuPage : EventProcessor
 
     private void subMenuActive(bool _active)
     {
-        submenu_option.SetActive(_active);
+        submenu.SetActive(_active);
     }
 
     public void OnClickTitleButton() 

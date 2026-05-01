@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 5288944923429770150}
   - component: {fileID: 8209305289036945587}
   - component: {fileID: 2057268045728967799}
+  - component: {fileID: 2122049009359284848}
   m_Layer: 5
   m_Name: option
   m_TagString: Untagged
@@ -410,6 +411,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2122049009359284848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627358264484396868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d44449cd91c9e3498915df3682f1196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: 4
 --- !u!1 &1104624065597036026
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +847,7 @@ GameObject:
   - component: {fileID: 486265494276846419}
   - component: {fileID: 2447568314441457850}
   - component: {fileID: 1342253661993365508}
+  - component: {fileID: 1340211961999607292}
   m_Layer: 5
   m_Name: encyclopedia
   m_TagString: Untagged
@@ -1025,6 +1040,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1340211961999607292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4707150285367427695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d44449cd91c9e3498915df3682f1196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: 3
 --- !u!1 &4919876899024836872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1101,7 @@ GameObject:
   - component: {fileID: 8042775659415896991}
   - component: {fileID: 304744792920290485}
   - component: {fileID: 2078154396813371817}
+  - component: {fileID: 1599518900179404452}
   m_Layer: 5
   m_Name: equipment
   m_TagString: Untagged
@@ -1265,6 +1294,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1599518900179404452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273523700260789291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d44449cd91c9e3498915df3682f1196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: 1
 --- !u!1 &5422059178307047062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,6 +1385,7 @@ GameObject:
   - component: {fileID: 8956011796099075366}
   - component: {fileID: 2196664439722019626}
   - component: {fileID: 7504447706247497827}
+  - component: {fileID: 7983094071724295543}
   m_Layer: 5
   m_Name: species&job
   m_TagString: Untagged
@@ -1535,6 +1578,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7983094071724295543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500758611734383552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d44449cd91c9e3498915df3682f1196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: 2
 --- !u!1 &5793679865980777628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,7 +1811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Container: {fileID: 6081349900370916696}
   playTime: {fileID: 364259872779486356}
-  submenu_option: {fileID: 9098343092098573203}
+  submenu: {fileID: 9098343092098573203}
   equipment_menu: {fileID: 5925388969476087180}
   speciesjob_menu: {fileID: 4291991551262429054}
   encyclopedia_menu: {fileID: 4919876899024836872}
@@ -1888,8 +1944,9 @@ GameObject:
   - component: {fileID: 1853071432627237561}
   - component: {fileID: 8495648296698746819}
   - component: {fileID: 1081161430327614388}
+  - component: {fileID: 8037222244681106340}
   m_Layer: 5
-  m_Name: menu
+  m_Name: submenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2070,7 +2127,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -2416604669742223984}
         m_TargetAssemblyTypeName: MenuPage, Assembly-CSharp
-        m_MethodName: OnClickMenuButton
+        m_MethodName: OnClickSubMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2080,6 +2137,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8037222244681106340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549478434455596480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d44449cd91c9e3498915df3682f1196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: 5
 --- !u!1 &8604550542525728165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,7 +2366,7 @@ GameObject:
   - component: {fileID: 7040607317910919951}
   - component: {fileID: 7768077981653352853}
   m_Layer: 5
-  m_Name: SubMenus_option
+  m_Name: SubMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,6 +10,9 @@ public class MenuPage : EventProcessor
 {
     [SerializeField] private TextMeshProUGUI playTime;
     [SerializeField] private GameObject submenu_option;
+    [SerializeField] private GameObject equipment_menu;
+    [SerializeField] private GameObject speciesjob_menu;
+    [SerializeField] private GameObject encyclopedia_menu;
 
     private MenuEnum menuEnum;
 
@@ -17,7 +20,7 @@ public class MenuPage : EventProcessor
     {
         GameManager.Instance.SetGameState(GameStateEnum.Stop);
         base.OpenPage();
-        OnClickOneButton();
+        OnClickMenuButton();
     }
 
     public void OnClickClosePageButton()
@@ -36,22 +39,28 @@ public class MenuPage : EventProcessor
 
     private void SettingUI() 
     {
+        menuHIde();
         subMenuActive(false);
 
 
         switch (menuEnum)
         {
-            case MenuEnum.One:
+            case MenuEnum.Menu:
                 playTime.text = Util.GetTimer(GameManager.Instance.SaveData.playTime);
                 break;
-            case MenuEnum.Two:
+            case MenuEnum.Equipment:
+                equipment_menu.SetActive(true);
                 break;
-            case MenuEnum.Three:
+            case MenuEnum.SpeciesJob:
+                speciesjob_menu.SetActive(true);
+                break;
+            case MenuEnum.Encyclopedia:
+                encyclopedia_menu.SetActive(true);
                 break;
             case MenuEnum.Option:
                 UIPrefabManager.Instance.OptionPageProperty.OnClickOpenPageButton();
                 break;
-            case MenuEnum.Menu:
+            case MenuEnum.SubMenu:
                 subMenuActive(true);
                 break;
             default:
@@ -59,21 +68,27 @@ public class MenuPage : EventProcessor
         }
     }
 
-    public void OnClickOneButton()
+    public void OnClickMenuButton()
     {
-        menuEnum = MenuEnum.One;
+        menuEnum = MenuEnum.Menu;
         SettingUI();
     }
 
-    public void OnClickTwoButton()
+    public void OnClickEquipmentButton()
     {
-        menuEnum = MenuEnum.Two;
+        menuEnum = MenuEnum.Equipment;
         SettingUI();
     }
 
-    public void OnClickThreeButton()
+    public void OnClickSpeciesJobButton()
     {
-        menuEnum = MenuEnum.Three;
+        menuEnum = MenuEnum.SpeciesJob;
+        SettingUI();
+    }
+
+    public void OnClickEncyclopediaButton()
+    {
+        menuEnum = MenuEnum.Encyclopedia;
         SettingUI();
     }
 
@@ -84,10 +99,17 @@ public class MenuPage : EventProcessor
         SettingUI();
     }
 
-    public void OnClickMenuButton()
+    public void OnClickSubMenuButton()
     {
-        menuEnum = MenuEnum.Menu;
+        menuEnum = MenuEnum.SubMenu;
         SettingUI();
+    }
+
+    private void menuHIde()
+    {
+        equipment_menu.SetActive(false);
+        speciesjob_menu.SetActive(false);
+        encyclopedia_menu.SetActive(false);
     }
 
     private void subMenuActive(bool _active)

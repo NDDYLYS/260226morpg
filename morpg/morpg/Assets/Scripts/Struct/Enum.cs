@@ -59,11 +59,12 @@ public enum SaveLoadEnum
 public enum MenuEnum 
 {
     None = -1,
-    One,
-    Two,
-    Three,
-    Option,
     Menu,
+    Equipment,
+    SpeciesJob,
+    Encyclopedia,
+    Option,
+    SubMenu,
     Max
 }
 

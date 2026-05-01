@@ -153,3 +153,28 @@ public enum JobEnum
     Archmage,
     Max
 }
+
+public enum ArmorEnum
+{
+    None = 1,
+    Cloth,
+    Leather,
+    Plate,
+    Max
+}
+
+public enum EqipmentEnum
+{
+    None = -1,
+    Weapon,
+    Head,
+    Armor,
+    Gloves,
+    Boots,
+    LeftRing,
+    RightRIng,
+    LeftEarring,
+    RightEarring,
+    Necklace,
+    Max
+}

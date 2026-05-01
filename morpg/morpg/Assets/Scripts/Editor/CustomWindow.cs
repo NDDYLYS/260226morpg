@@ -82,13 +82,19 @@ public class CustomWindow : EditorWindow
         if (Constant.dataSlot < index)
             index = Constant.dataSlot;
 
+        GUILayout.BeginHorizontal();
+
         if (GUILayout.Button("Load", GUILayout.ExpandWidth(false)))
             UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton(SaveLoadEnum.Load); //UGSManager.Instance.Load(index);
 
         if (GUILayout.Button("Save", GUILayout.ExpandWidth(false)))
             UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton(SaveLoadEnum.Save);//UGSManager.Instance.Save(index);
 
+        GUILayout.EndHorizontal();
+
         EditorGUILayout.Space(10f);
+
+        GUILayout.BeginHorizontal();
 
         Time.timeScale = EditorGUILayout.Slider(new GUIContent("TimeScale", $"인게임의 속도를 조절한다.(0~10)"), Time.timeScale, 0f, 10f);
 
@@ -101,9 +107,13 @@ public class CustomWindow : EditorWindow
         if (GUILayout.Button("Go to BuildFolder", GUILayout.ExpandWidth(false)))
             GotoBuildFolder();
 
+        GUILayout.EndHorizontal();
+
         EditorGUILayout.Space(10f);
 
         textValue = EditorGUILayout.TextField("text : ", textValue, GUILayout.ExpandWidth(true));
+
+        GUILayout.BeginHorizontal();
 
         if (GUILayout.Button("Log", GUILayout.ExpandWidth(false)))
             Debug.Log(textValue);
@@ -114,7 +124,11 @@ public class CustomWindow : EditorWindow
         if (GUILayout.Button("LogError", GUILayout.ExpandWidth(false)))
             Debug.LogError(textValue);
 
+        GUILayout.EndHorizontal();
+
         EditorGUILayout.Space(10f);
+
+        GUILayout.BeginHorizontal();
 
         species = (SpeciesEnum)EditorGUILayout.EnumPopup("species : ", species, GUILayout.ExpandWidth(true));
 
@@ -124,6 +138,10 @@ public class CustomWindow : EditorWindow
                 GameManager.Instance.SaveData.species = species;
         }
 
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+
         job = (JobEnum)EditorGUILayout.EnumPopup("job : ", job, GUILayout.ExpandWidth(true));
 
         if (GUILayout.Button("Change Job", GUILayout.ExpandWidth(false)))
@@ -132,6 +150,10 @@ public class CustomWindow : EditorWindow
                 GameManager.Instance.SaveData.job = job;
         }
 
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+
         encyclopedia = EditorGUILayout.TextField("encyclopedia : ", encyclopedia, GUILayout.ExpandWidth(true));
 
         if (GUILayout.Button("Add Encyclopedia", GUILayout.ExpandWidth(false)))
@@ -139,6 +161,8 @@ public class CustomWindow : EditorWindow
             if (GameManager.Instance?.SaveData != null)
                 GameManager.Instance.SaveData.encyclopediaList.Add(encyclopedia);
         }
+
+        GUILayout.EndHorizontal();
 
         GUILayout.EndScrollView();
     }

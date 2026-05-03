@@ -11,9 +11,9 @@ public class MenuPage : EventProcessor
 {
     [SerializeField] private TextMeshProUGUI playTime;
     [SerializeField] private GameObject submenu;
-    [SerializeField] private GameObject equipment_menu;
-    [SerializeField] private GameObject speciesjob_menu;
-    [SerializeField] private GameObject encyclopedia_menu;
+    [SerializeField] private EquimentMenu equipment_menu;
+    [SerializeField] private SpeciesJobMenu speciesjob_menu;
+    [SerializeField] private EncyclopediaMenu encyclopedia_menu;
 
 
     private MenuEnum menuEnum;
@@ -61,13 +61,13 @@ public class MenuPage : EventProcessor
                 playTime.text = Util.GetTimer(GameManager.Instance.SaveData.playTime);
                 break;
             case MenuEnum.Equipment:
-                equipment_menu.SetActive(true);
+                equipment_menu.gameObject.SetActive(true);
                 break;
             case MenuEnum.SpeciesJob:
-                speciesjob_menu.SetActive(true);
+                speciesjob_menu.gameObject.SetActive(true);
                 break;
             case MenuEnum.Encyclopedia:
-                encyclopedia_menu.SetActive(true);
+                encyclopedia_menu.gameObject.SetActive(true);
                 break;
             case MenuEnum.Option:
                 UIPrefabManager.Instance.OptionPageProperty.OnClickOpenPageButton();
@@ -119,9 +119,9 @@ public class MenuPage : EventProcessor
 
     private void menuHIde()
     {
-        equipment_menu.SetActive(false);
-        speciesjob_menu.SetActive(false);
-        encyclopedia_menu.SetActive(false);
+        equipment_menu.gameObject.SetActive(false);
+        speciesjob_menu.gameObject.SetActive(false);
+        encyclopedia_menu.gameObject.SetActive(false);
     }
 
     private void subMenuActive(bool _active)

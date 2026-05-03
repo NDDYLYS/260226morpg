@@ -6,7 +6,7 @@ public class Table_Job
 	public string CodeName ;
 	public JobEnum Job ;
 	public HiddenEnum Hidden ;
-	public SpeciesEnum Required ;
+	public int Consume ;
 
 
 	public static void AutoLoadTable()
@@ -26,7 +26,7 @@ public class Table_Job
 			newData.CodeName = _data[i, columnCount++];
 			newData.Job = Util.GetEnumType<JobEnum>(_data[i, columnCount++]);
 			newData.Hidden = Util.GetEnumType<HiddenEnum>(_data[i, columnCount++]);
-			newData.Required = Util.GetEnumType<SpeciesEnum>(_data[i, columnCount++]);
+			newData.Consume = int.Parse(_data[i, columnCount++]);
 			TableDataManager.Instance.SetDictinary<Table_Job>(newData.Index, newData.CodeName, newData);
 		}
 	}

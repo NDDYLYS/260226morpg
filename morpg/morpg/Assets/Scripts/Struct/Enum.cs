@@ -131,7 +131,9 @@ public enum SpeciesEnum
     Selena,
     Badrak,
     Machine,
+    Demon,
     Sandora,
+    Dragon,
     Kalapok,
     Unknown,
     Max
@@ -145,12 +147,13 @@ public enum JobEnum
     Archer,
     Mage,
     Priest,
-    Assasin,
+    Assassin,
     Rogue,
     Summoner,
     Alchemist,
     Necromancer,
-    Demon,
+    DemonFighter,
+    DemonMage,
     Archmage,
     Max
 }

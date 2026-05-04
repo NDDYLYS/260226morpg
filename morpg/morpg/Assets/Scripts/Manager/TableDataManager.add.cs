@@ -7,25 +7,25 @@ using System.Text;
 
 public partial class TableDataManager : SingletonGameObject<TableDataManager>
 {
-    [Button]
-    public List<Table_Encyclopedia> GetEncyclopedia(EncyclopediaEnum _enum, CocruwaEnum _cocruwa = CocruwaEnum.None)
-    {
-        var all = GetTableDataList<Table_Encyclopedia>();
-        List<Table_Encyclopedia> list = null;
-        if (_enum != EncyclopediaEnum.Cocruwa)
-            list = all.Where(x => x.Encyclopedia == _enum).ToList();
-        else 
-            list = all.Where(x => x.Encyclopedia == EncyclopediaEnum.Cocruwa).ToList().Where(x => x.Cocruwa == _cocruwa).ToList();
+    //[Button]
+    //public List<Table_Encyclopedia> GetEncyclopedia(EncyclopediaEnum _enum, CocruwaEnum _cocruwa = CocruwaEnum.None)
+    //{
+    //    var all = GetTableDataList<Table_Encyclopedia>();
+    //    List<Table_Encyclopedia> list = null;
+    //    if (_enum != EncyclopediaEnum.Cocruwa)
+    //        list = all.Where(x => x.Encyclopedia == _enum).ToList();
+    //    else 
+    //        list = all.Where(x => x.Encyclopedia == EncyclopediaEnum.Cocruwa).ToList().Where(x => x.Cocruwa == _cocruwa).ToList();
 
-        var texts = new StringBuilder();
-        foreach (var data in list)
-        {
-            texts.Append($"{data.Encyclopedia}-{data.CodeName}");
-            texts.Append("\n");
-        }
+    //    var texts = new StringBuilder();
+    //    foreach (var data in list)
+    //    {
+    //        texts.Append($"{data.Encyclopedia}-{data.CodeName}");
+    //        texts.Append("\n");
+    //    }
 
-        //Debug.Log(texts);
+    //    //Debug.Log(texts);
 
-        return list;
-    }
+    //    return list;
+    //}
 }

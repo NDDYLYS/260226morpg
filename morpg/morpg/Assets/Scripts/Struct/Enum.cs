@@ -94,24 +94,24 @@ public enum EncyclopediaEnum
     Max
 }
 
-public enum CocruwaEnum
-{
-    None = -1,
-    Renod,
-    Tartaros,
-    Redinin,
-    Perth,
-    Ehrlone,
-    Gingarsion,
-    GrenFomos,
-    NarosaFomos,
-    IreanSorin,
-    BultonKajon,
-    KaroukWingent,
-    RoutonWinner,
-    GaremenTooskaDin,
-    Max
-}
+//public enum CocruwaEnum
+//{
+//    None = -1,
+//    Renod,
+//    Tartaros,
+//    Redinin,
+//    Perth,
+//    Ehrlone,
+//    Gingarsion,
+//    GrenFomos,
+//    NarosaFomos,
+//    IreanSorin,
+//    BultonKajon,
+//    KaroukWingent,
+//    RoutonWinner,
+//    GaremenTooskaDin,
+//    Max
+//}
 
 public enum HiddenEnum
 {

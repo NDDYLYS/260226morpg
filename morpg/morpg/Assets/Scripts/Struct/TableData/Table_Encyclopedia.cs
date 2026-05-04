@@ -5,7 +5,8 @@ public class Table_Encyclopedia
 	public int Index ;
 	public string CodeName ;
 	public EncyclopediaEnum Encyclopedia ;
-	public CocruwaEnum Cocruwa ;
+	public string Title ;
+	public string Desc ;
 
 
 	public static void AutoLoadTable()
@@ -24,7 +25,8 @@ public class Table_Encyclopedia
 			newData.Index = int.Parse(_data[i, columnCount++]);
 			newData.CodeName = _data[i, columnCount++];
 			newData.Encyclopedia = Util.GetEnumType<EncyclopediaEnum>(_data[i, columnCount++]);
-			newData.Cocruwa = Util.GetEnumType<CocruwaEnum>(_data[i, columnCount++]);
+			newData.Title = _data[i, columnCount++];
+			newData.Desc = _data[i, columnCount++];
 			TableDataManager.Instance.SetDictinary<Table_Encyclopedia>(newData.Index, newData.CodeName, newData);
 		}
 	}

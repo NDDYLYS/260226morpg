@@ -21,7 +21,6 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
             }
         }
 
-        Debug.Log(string.Join("/", list));
         return list;
     }
 

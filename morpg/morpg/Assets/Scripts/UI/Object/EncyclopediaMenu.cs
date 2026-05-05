@@ -78,7 +78,6 @@ public class EncyclopediaMenu : MonoBehaviour
         {
             obj.gameObject.SetActive(false);
             objectPool.Push(obj);
-            //objectList.Remove(obj);
         }
         objectList.Clear();
     }

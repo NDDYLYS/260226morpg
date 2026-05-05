@@ -6,16 +6,8 @@ using System.Text;
 
 public class TableMakerManager
 {
-    [MenuItem("TableMakerManager/Create TableStruct/ForAssetBundle")]
-    static void CreateTableStructForAssetBundle()
-    {
-        CreateTableStruct(GetBundleFolderPath());
-
-        CopyAll();
-    }
-
-    [MenuItem("TableMakerManager/Create TableStruct/ForResources")]
-    static void CreateTableStructForResources()
+    [MenuItem("TableMakerManager/Build")]
+    static void Build()
     {
         CreateTableStruct(GetResourcesFolderPath(), true);
 
@@ -24,23 +16,21 @@ public class TableMakerManager
 
     private static void CreateTableStruct(string _path, bool _isResource = false)
     {
-        ClearConsole();
-        
         List<string> filesPath = GetTableDataList(_path);
         for (int i = 0; i < filesPath.Count; i++)
         {
             // 260307 xlsx 불러오는 기능으로 확장
             //string tableName = filesPath[i].Replace(".csv", "");
-            string tableName = Path.GetFileNameWithoutExtension(filesPath[i]);
+            var tableName = Path.GetFileNameWithoutExtension(filesPath[i]);
 
-            string filePath = string.Format("{0}/{1}", _path, filesPath[i]);
+            var filePath = string.Format("{0}/{1}", _path, filesPath[i]);
             
             // 260307 xlsx 불러오는 기능으로 확장
             //string text = Util.LoadFile(filePath, Encoding.Unicode);
             //string[,] array = Util.PublicExcelReader(text);
             string[,] array = ExcelUtil.ReadXlsx(filePath);
 
-            List<string> completeStruct = new List<string>();
+            var completeStruct = new List<string>();
             completeStruct.Add(string.Format(""));
 
             completeStruct.Add(string.Format("[System.Serializable]"));
@@ -278,7 +268,7 @@ public class TableMakerManager
 
             completeStruct.Add("}");
 
-            string complete = string.Join("\n", completeStruct.ToArray());
+            var complete = string.Join("\n", completeStruct.ToArray());
             Util.SaveFile(string.Format("{0}/{1}.cs", GetStructPath(), tableName), complete, Encoding.UTF8);
 
             Debug.Log(string.Format("<color=yellow>{0}.cs</color> <color=blue>TableStruct Create Complete</color>", tableName));
@@ -287,42 +277,11 @@ public class TableMakerManager
         AssetDatabase.Refresh();
         Debug.Log(string.Format("<color=blue>TableStruct Create Complete</color>"));
     }
-
-    [MenuItem("TableMakerManager/Table Changed Encoding/ForAssetBundle")]
-    static void TableChangedEncodingForAssetBundle()
-    {
-        TableChangedEncoding(GetBundleFolderPath());
-    }
-
-    [MenuItem("TableMakerManager/Table Changed Encoding/ForResources")]
-    static void TableChangedEncodingForResources()
-    {
-        TableChangedEncoding(GetResourcesFolderPath());
-    }
     
-    private static void TableChangedEncoding(string _path)
-    {
-        ClearConsole();
-        Encoding before = Encoding.Default;
-        Encoding after = new UnicodeEncoding();
-
-        List<string> filesPath = GetTableDataList(_path);
-        for (int i = 0; i < filesPath.Count; i++)
-        {
-            string filePath = string.Format("{0}/{1}", _path, filesPath[i]);
-            string text = Util.LoadFile(filePath, before);
-            Util.SaveFile(filePath, text, after);
-            Debug.Log(string.Format("<color=yellow>{0}</color> <color=magenta>{1}</color> <color=yellow>-></color> <color=cyan>{2}</color> <color=blue>Encoding Complete</color>", filesPath[i], before, after));
-        }
-
-        AssetDatabase.Refresh();
-        Debug.Log(string.Format("<color=blue>All Table Complete</color>"));
-    }
-
     private static List<string> GetTableDataList(string _path)
     {
-        DirectoryInfo directory = new DirectoryInfo(_path);
-        FileInfo[] files = directory.GetFiles();
+        var directory = new DirectoryInfo(_path);
+        var files = directory.GetFiles();
         List<string> filesPath = new List<string>();
         for (int i = 0; i < files.Length; i++)
         {
@@ -336,15 +295,6 @@ public class TableMakerManager
 
         filesPath.Sort();
         return filesPath;
-    }
-
-    /// <summary>
-    /// 번들에 있는 테이블을 불러오는 경로
-    /// </summary>
-    /// <returns></returns>
-    private static string GetBundleFolderPath()
-    {
-        return Path.GetFullPath("../morpg/Assets/AssetBundle/TableData");
     }
 
     /// <summary>
@@ -365,18 +315,11 @@ public class TableMakerManager
         return Path.GetFullPath("../morpg/Assets/Scripts/Struct/TableData");
     }
 
-    public static void ClearConsole()
-    {
-        //Assembly assembly = Assembly.GetAssembly(typeof(SceneView));
-        //Type log = assembly.GetType("UnityEditorInternal.LogEntries");
-        //MethodInfo clear = log.GetMethod("Clear");
-        //clear.Invoke(new object(), null);
-    }
 
     public static void CopyAll()
     {
-        string sourceFolder = "Assets/TableData";
-        string targetFolder = "Assets/Resources/TableData";
+        var sourceFolder = "Assets/TableData";
+        var targetFolder = "Assets/Resources/TableData";
 
         if (!Directory.Exists(sourceFolder))
         {
@@ -389,12 +332,12 @@ public class TableMakerManager
             Directory.CreateDirectory(targetFolder);
         }
 
-        string[] files = Directory.GetFiles(sourceFolder, "*.xlsx", SearchOption.TopDirectoryOnly);
+        var files = Directory.GetFiles(sourceFolder, "*.xlsx", SearchOption.TopDirectoryOnly);
 
         foreach (var file in files)
         {
-            string fileName = Path.GetFileNameWithoutExtension(file);
-            string targetPath = Path.Combine(targetFolder, fileName + ".bytes");
+            var fileName = Path.GetFileNameWithoutExtension(file);
+            var targetPath = Path.Combine(targetFolder, fileName + ".bytes");
 
             File.Copy(file, targetPath, true);
         }

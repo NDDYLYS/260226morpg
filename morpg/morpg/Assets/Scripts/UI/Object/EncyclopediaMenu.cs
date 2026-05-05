@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class EncyclopediaMenu : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class EncyclopediaMenu : MonoBehaviour
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private Transform content;
     [SerializeField] private EncyclopediaObject item;
+    [SerializeField] private TextMeshProUGUI desc;
 
     private Stack<EncyclopediaObject> objectPool; // 미사용
     private List<EncyclopediaObject> objectList; // 사용 중
@@ -66,7 +68,7 @@ public class EncyclopediaMenu : MonoBehaviour
         foreach (var element in list) 
         {
             var obj = objectPoolOn();
-            obj.SettingUI(element);
+            obj.SettingUI(element, this);
         }
     }
 
@@ -94,5 +96,10 @@ public class EncyclopediaMenu : MonoBehaviour
 
         obj.transform.SetAsLastSibling();
         return obj;
+    }
+
+    public void SettingDesc(string _desc) 
+    {
+        desc.text = _desc;
     }
 }

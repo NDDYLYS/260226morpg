@@ -6,9 +6,29 @@ using TMPro;
 public class EncyclopediaObject : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI tmp;
+    private string title;
+    private EncyclopediaMenu menu;
 
-    public void SettingUI(string _title) 
+    public void SettingUI(string _title, EncyclopediaMenu _menu) 
     {
-        tmp.text = _title.GetTableText();
+        title = _title;
+        if (menu == null)
+            menu = _menu;
+
+        tmp.text = title.GetTableText();
+    }
+
+    public void OnClickDescButton()
+    {
+        var textList = new List<string>();
+        var list = TableDataManager.Instance.getEncyclopediaDesc(title);
+        foreach (var item in list) 
+        {
+            textList.Add(item.GetTableText());
+        }
+
+        var text = string.Join("\n\n", textList.ToArray());
+
+        menu.SettingDesc(text);
     }
 }

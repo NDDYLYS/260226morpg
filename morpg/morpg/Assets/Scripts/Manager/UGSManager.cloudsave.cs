@@ -66,8 +66,6 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         GameManager.Instance.SetGameState(GameStateEnum.Play);
         GameManager.Instance.SaveData = saveData;
         GameManager.Instance.MovingScene("2Village");
-
-        TableDataManager.Instance.getSavedata_Encyclopedia();
     }
 
     public async Task refreshSaveData()

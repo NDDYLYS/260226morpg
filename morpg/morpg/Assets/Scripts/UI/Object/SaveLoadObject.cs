@@ -57,7 +57,15 @@ public class SaveLoadObject : MonoBehaviour
     private void Load() 
     {
         if (saveData == null)
+        {
+            UIPrefabManager.Instance.MessageBoxProperty.OnClickOpenPageButton("NotSavedata", delegate (MessageBoxClick click)
+            {
+                if (click == MessageBoxClick.Confirm)
+                {
+                }
+            });
             return;
+        }
 
         UGSManager.Instance.Load(Index);
     }

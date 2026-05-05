@@ -49,9 +49,6 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
     {
         if (_index <= 0)
             return;
-        if (Constant.dataSlot < _index)
-            return;
-
 
         var keys = new HashSet<string> { $"PLAYER_SAVE_{_index}" };
 

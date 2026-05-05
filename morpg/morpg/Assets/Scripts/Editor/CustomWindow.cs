@@ -135,7 +135,7 @@ public class CustomWindow : EditorWindow
         if (GUILayout.Button("Change Species", GUILayout.ExpandWidth(false)))
         {
             if (GameManager.Instance?.SaveData != null)
-                GameManager.Instance.SaveData.species = species;
+                GameManager.Instance.SaveData.Species = species;
         }
 
         GUILayout.EndHorizontal();
@@ -147,7 +147,7 @@ public class CustomWindow : EditorWindow
         if (GUILayout.Button("Change Job", GUILayout.ExpandWidth(false)))
         {
             if (GameManager.Instance?.SaveData != null)
-                GameManager.Instance.SaveData.job = job;
+                GameManager.Instance.SaveData.Job = job;
         }
 
         GUILayout.EndHorizontal();
@@ -159,7 +159,12 @@ public class CustomWindow : EditorWindow
         if (GUILayout.Button("Add Encyclopedia", GUILayout.ExpandWidth(false)))
         {
             if (GameManager.Instance?.SaveData != null)
-                GameManager.Instance.SaveData.encyclopediaList.Add(encyclopedia);
+            {
+                var encyclopediaT = TableDataManager.Instance.GetTableData<Table_Encyclopedia>(encyclopedia);
+                if (encyclopediaT == null)
+                    return;
+                GameManager.Instance.SaveData.AddEncyclopedia(encyclopedia);
+            }
         }
 
         GUILayout.EndHorizontal();

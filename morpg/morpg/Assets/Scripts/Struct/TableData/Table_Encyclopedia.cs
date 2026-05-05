@@ -7,6 +7,7 @@ public class Table_Encyclopedia
 	public EncyclopediaEnum Encyclopedia ;
 	public string Title ;
 	public string Desc ;
+	public int Order ;
 
 
 	public static void AutoLoadTable()
@@ -27,6 +28,7 @@ public class Table_Encyclopedia
 			newData.Encyclopedia = Util.GetEnumType<EncyclopediaEnum>(_data[i, columnCount++]);
 			newData.Title = _data[i, columnCount++];
 			newData.Desc = _data[i, columnCount++];
+			newData.Order = int.Parse(_data[i, columnCount++]);
 			TableDataManager.Instance.SetDictinary<Table_Encyclopedia>(newData.Index, newData.CodeName, newData);
 		}
 	}

@@ -31,6 +31,13 @@ public class EncyclopediaMenu : MonoBehaviour
         encyclopediaEnum = EncyclopediaEnum.None;
     }
 
+    public void Refresh()
+    {
+        encyclopediaEnum = EncyclopediaEnum.Cocruwa;
+        clickedMenuFocus();
+        changeList(encyclopediaEnum);
+    }
+
     public void OnClickCocruwaButton() 
     {
         encyclopediaEnum = EncyclopediaEnum.Cocruwa;

@@ -58,7 +58,7 @@ public class MenuPage : EventProcessor
         switch (menuEnum)
         {
             case MenuEnum.Menu:
-                playTime.text = Util.GetTimer(GameManager.Instance.SaveData.playTime);
+                playTime.text = Util.GetTimer(GameManager.Instance.SaveData.PlayTime);
                 break;
             case MenuEnum.Equipment:
                 equipment_menu.gameObject.SetActive(true);
@@ -102,6 +102,11 @@ public class MenuPage : EventProcessor
     {
         menuEnum = MenuEnum.Encyclopedia;
         SettingUI();
+    }
+
+    public void Refresh() 
+    {
+        encyclopedia_menu.Refresh();
     }
 
 

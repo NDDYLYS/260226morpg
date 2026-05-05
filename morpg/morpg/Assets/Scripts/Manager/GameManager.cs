@@ -110,7 +110,7 @@ public class GameManager : SingletonGameObject<GameManager>
             return;
         if (EqualsGameState(GameStateEnum.Stop) == true)
             return;
-        SaveData.playTime += Time.fixedDeltaTime;
+        SaveData.PlayTime += Time.fixedDeltaTime;
     }
 
     public void SetGameState(GameStateEnum _state)

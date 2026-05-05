@@ -25,7 +25,10 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            UIPrefabManager.Instance.MenuPageProperty.OnClickOpenPageButton();
+            if (!UIPrefabManager.Instance.MenuPageProperty.Container.activeSelf)
+                UIPrefabManager.Instance.MenuPageProperty.OnClickOpenPageButton();
+            else
+                UIPrefabManager.Instance.MenuPageProperty.OnClickClosePageButton();
         }
     }
 }

@@ -7,6 +7,9 @@ using System.Text;
 
 public partial class TableDataManager : SingletonGameObject<TableDataManager>
 {
+    private List<string> titleList = new List<string>();
+    private List<string> descList = new List<string>();
+
     public List<string> getEncyclopediaList(EncyclopediaEnum _enum)
     {
         var list = new List<string>();
@@ -16,8 +19,8 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
         {
             if (element.Encyclopedia == _enum)
             {
-                if (!list.Contains(element.Title))
-                    list.Add(element.Title);
+                if (element.Order == 1)
+                    list.Add(getTitle(element.Title));
             }
         }
 
@@ -33,10 +36,40 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
         {
             if (element.Title.Equals(_title))
             {
-                list.Add(element.Desc);
+                list.Add(getDesc(element.Desc));
             }
         }
 
         return list;
+    }
+
+    public void updateSavedata(SaveData _savedata) 
+    {
+        titleList.Clear();
+        descList.Clear();
+
+        var list = _savedata.EncyclopediaList;
+        foreach (var element in list) 
+        {
+            var table = GetTableData<Table_Encyclopedia>(element);
+            if (table == null)
+                return;
+            titleList.Add(table.Title);
+            descList.Add(table.Desc);
+        }
+    }
+
+    public string getTitle(string _title) 
+    {
+        if (titleList.Contains(_title))
+            return _title;
+        return "Hidden001";
+    }
+
+    public string getDesc(string _desc)
+    {
+        if (descList.Contains(_desc))
+            return _desc;
+        return "Hidden002";
     }
 }

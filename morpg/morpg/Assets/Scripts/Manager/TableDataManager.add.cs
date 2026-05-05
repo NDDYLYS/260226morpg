@@ -7,25 +7,22 @@ using System.Text;
 
 public partial class TableDataManager : SingletonGameObject<TableDataManager>
 {
-    //[Button]
-    //public List<Table_Encyclopedia> GetEncyclopedia(EncyclopediaEnum _enum, CocruwaEnum _cocruwa = CocruwaEnum.None)
-    //{
-    //    var all = GetTableDataList<Table_Encyclopedia>();
-    //    List<Table_Encyclopedia> list = null;
-    //    if (_enum != EncyclopediaEnum.Cocruwa)
-    //        list = all.Where(x => x.Encyclopedia == _enum).ToList();
-    //    else 
-    //        list = all.Where(x => x.Encyclopedia == EncyclopediaEnum.Cocruwa).ToList().Where(x => x.Cocruwa == _cocruwa).ToList();
+    [Button]
+    public List<string> getEncyclopediaList(EncyclopediaEnum _enum) 
+    {
+        var list = new List<string>();
+        var encyclopedia = GetTableDataList<Table_Encyclopedia>();
 
-    //    var texts = new StringBuilder();
-    //    foreach (var data in list)
-    //    {
-    //        texts.Append($"{data.Encyclopedia}-{data.CodeName}");
-    //        texts.Append("\n");
-    //    }
+        foreach (var element in encyclopedia)
+        {
+            if (element.Encyclopedia == _enum) 
+            { 
+                if (!list.Contains(element.Title))
+                    list.Add(element.Title);
+            }
+        }
 
-    //    //Debug.Log(texts);
-
-    //    return list;
-    //}
+        Debug.Log(string.Join("/", list));
+        return list;
+    }
 }

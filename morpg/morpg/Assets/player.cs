@@ -10,8 +10,15 @@ public class player : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private List<Tilemap> wallTilemapList;
     [SerializeField] private Tilemap wallTilemap; // 이동 불가 타일맵
+    private Animator animator;
 
-    void Update()
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
     {
         UnitFlip();
         getNearestTilemap();
@@ -29,7 +36,7 @@ public class player : MonoBehaviour
         }
     }
 
-    private void getNearestTilemap() 
+    private void getNearestTilemap()
     {
         if (wallTilemapList == null)
             wallTilemapList = new List<Tilemap>();
@@ -48,7 +55,7 @@ public class player : MonoBehaviour
         Tilemap closest = null;
         var closestDistance = Mathf.Infinity;
 
-        foreach (var tilemap in wallTilemapList) 
+        foreach (var tilemap in wallTilemapList)
         {
             if (tilemap == transform)
                 continue;
@@ -74,6 +81,14 @@ public class player : MonoBehaviour
         var dir_h = transform.right * h;
         var dir = new Vector3(h, v, 0f);
         var nextPos = transform.position + dir * moveSpeed * Time.deltaTime;
+
+        if (animator != null)
+        {
+            var moving = false;
+            if (dir != Vector3.zero)
+                moving = true;
+            animator.SetBool("1_Move", moving);
+        }
 
         if (CanMove(nextPos))
         {

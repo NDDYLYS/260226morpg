@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 
 
@@ -31,7 +32,8 @@ public class MenuManager : MonoBehaviour
         var species = GameManager.Instance.SaveData.Species;
         var prefab = TableDataManager.Instance.GetLoadedPrefab($"Units/{species.ToString()}");
         var unit = Util.CreateObject(prefab, null, Vector3.zero, Vector3.one);
-        unit.AddComponent<player>();
+
+        var animator = unit.transform.GetChild(0).AddComponent<player>();
     }
 
     private void Update()

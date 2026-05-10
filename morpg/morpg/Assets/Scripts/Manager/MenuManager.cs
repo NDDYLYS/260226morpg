@@ -16,9 +16,22 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    void Awake()
+    private void Awake()
     {
         DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        createUnit();
+    }
+
+    public void createUnit()
+    {
+        var species = GameManager.Instance.SaveData.Species;
+        var prefab = TableDataManager.Instance.GetLoadedPrefab($"Units/{species.ToString()}");
+        var unit = Util.CreateObject(prefab, null, Vector3.zero, Vector3.one);
+        unit.AddComponent<player>();
     }
 
     private void Update()

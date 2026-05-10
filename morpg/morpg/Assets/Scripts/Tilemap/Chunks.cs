@@ -7,14 +7,32 @@ using UnityEngine.Tilemaps;
 public class Chunks : MonoBehaviour
 {
     [SerializeField] float distance;
-    [SerializeField] GameObject playerObj;
+    [SerializeField] private Transform playerObj;
+    public Transform PlayerObj
+    {
+        get
+        {
+            if (playerObj == null)
+            {
+                var player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null)
+                    playerObj = player.transform;
+                return playerObj;
+            }
+            return null;
+        }
+        set
+        {
+            playerObj = value;
+        }
+    }
     [SerializeField] private Dictionary<TilemapEnum, List<TilemapRenderer>> dics;
 
     private void Awake()
     {
         var player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
-            playerObj = player.gameObject;
+            PlayerObj = player.transform;
 
         dics = new Dictionary<TilemapEnum, List<TilemapRenderer>>();
         var childCount = this.transform.childCount;
@@ -55,8 +73,15 @@ public class Chunks : MonoBehaviour
             var chunks = iter.Current.Value;
             foreach (var chunk in chunks)
             {
-                var dist = Vector3.Distance(playerObj.transform.position, chunk.transform.position);
-                chunk.enabled = dist < distance;
+
+                if (PlayerObj == null)
+                    return;
+
+                if (PlayerObj != null)
+                {
+                    var dist = Vector3.Distance(PlayerObj.transform.position, chunk.transform.position);
+                    chunk.enabled = dist < distance;
+                }
             }
         }
     }

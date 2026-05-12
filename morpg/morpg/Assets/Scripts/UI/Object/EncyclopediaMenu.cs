@@ -45,6 +45,13 @@ public class EncyclopediaMenu : MonoBehaviour
         changeList(encyclopediaEnum);
     }
 
+    public void OnClickCharacterButton()
+    {
+        encyclopediaEnum = EncyclopediaEnum.Character;
+        clickedMenuFocus();
+        changeList(encyclopediaEnum);
+    }
+
     public void OnClickTermButton()
     {
         encyclopediaEnum = EncyclopediaEnum.Term;

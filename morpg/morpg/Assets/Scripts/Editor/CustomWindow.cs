@@ -167,13 +167,30 @@ public class CustomWindow : EditorWindow
             }
         }
 
+        if (GUILayout.Button("Add Random 5 Encyclopedia", GUILayout.ExpandWidth(false)))
+        {
+            AddRandom5Encyclopedia();
+        }
+
         GUILayout.EndHorizontal();
 
         GUILayout.EndScrollView();
     }
 
 
+    private void AddRandom5Encyclopedia()
+    {
+        var all = TableDataManager.Instance.GetTableDataList<Table_Encyclopedia>();
+        all = Util.ShuffleAlgorithm(all, 10);
 
+        for (var i = 0; i < 10; i++)
+        {
+            if (GameManager.Instance?.SaveData != null)
+            {
+                GameManager.Instance.SaveData.AddEncyclopedia(all[i].CodeName);
+            }
+        }
+    }
 
     public void CaptureImage()
     {

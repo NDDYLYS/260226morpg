@@ -89,6 +89,7 @@ public enum EncyclopediaEnum
 {
     None = -1,
     Cocruwa,
+    Character,
     Term,
     History,
     Max

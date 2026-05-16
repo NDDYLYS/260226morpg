@@ -183,11 +183,16 @@ public class CustomWindow : EditorWindow
         var all = TableDataManager.Instance.GetTableDataList<Table_Encyclopedia>();
         all = Util.ShuffleAlgorithm(all, 10);
 
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < 5; i++)
         {
             if (GameManager.Instance?.SaveData != null)
             {
-                GameManager.Instance.SaveData.AddEncyclopedia(all[i].CodeName);
+                var noAdd = GameManager.Instance.SaveData.AddEncyclopedia(all[i].CodeName);
+                if (!noAdd)
+                {
+                    all = Util.ShuffleAlgorithm(all, 10);
+                    i--;
+                }
             }
         }
     }

@@ -11,9 +11,17 @@ public class EncyclopediaMenu : MonoBehaviour
     private EncyclopediaEnum encyclopediaEnum;
     private List<ClickEn> menuList;
 
-    [SerializeField] private ScrollRect scrollRect;
-    [SerializeField] private Transform content;
-    [SerializeField] private EncyclopediaObject item;
+    [Header("menu")]
+    [SerializeField] private ScrollRect menuScrollRect;
+    [SerializeField] private Transform menuContent;
+    [SerializeField] private ClickEn menuItem;
+
+    [Header("title")]
+    [SerializeField] private ScrollRect titleScrollRect;
+    [SerializeField] private Transform titleContent;
+    [SerializeField] private EncyclopediaObject titleItem;
+
+    [Header("desc")]
     [SerializeField] private TextMeshProUGUI desc;
 
     private Stack<EncyclopediaObject> objectPool; // ¹Ì»ç¿ë
@@ -21,9 +29,10 @@ public class EncyclopediaMenu : MonoBehaviour
 
     private void Awake()
     {
-        menuList = GetComponentsInChildren<ClickEn>().ToList();
         objectPool = new Stack<EncyclopediaObject>();
         objectList = new List<EncyclopediaObject>();
+
+        menuObj();
     }
 
     private void OnEnable()
@@ -33,35 +42,12 @@ public class EncyclopediaMenu : MonoBehaviour
 
     public void Refresh()
     {
-        encyclopediaEnum = EncyclopediaEnum.Cocruwa;
-        clickedMenuFocus();
-        changeList(encyclopediaEnum);
+        OnClickEnumButton(EncyclopediaEnum.Cocruwa);
     }
 
-    public void OnClickCocruwaButton() 
+    public void OnClickEnumButton(EncyclopediaEnum _menu)
     {
-        encyclopediaEnum = EncyclopediaEnum.Cocruwa;
-        clickedMenuFocus();
-        changeList(encyclopediaEnum);
-    }
-
-    public void OnClickCharacterButton()
-    {
-        encyclopediaEnum = EncyclopediaEnum.Character;
-        clickedMenuFocus();
-        changeList(encyclopediaEnum);
-    }
-
-    public void OnClickTermButton()
-    {
-        encyclopediaEnum = EncyclopediaEnum.Term;
-        clickedMenuFocus();
-        changeList(encyclopediaEnum);
-    }
-
-    public void OnClickHistoryButton()
-    {
-        encyclopediaEnum = EncyclopediaEnum.History;
+        encyclopediaEnum = _menu;
         clickedMenuFocus();
         changeList(encyclopediaEnum);
     }
@@ -102,7 +88,7 @@ public class EncyclopediaMenu : MonoBehaviour
         if (1 <= objectPool.Count)
             obj = objectPool.Pop();
         else
-            obj = Util.CreateObject(item.gameObject, content, Vector2.zero, Vector2.one).GetComponent<EncyclopediaObject>();
+            obj = Util.CreateObject(titleItem.gameObject, titleContent, Vector2.zero, Vector2.one).GetComponent<EncyclopediaObject>();
 
         obj.gameObject.SetActive(true);
         objectList.Add(obj);
@@ -114,5 +100,22 @@ public class EncyclopediaMenu : MonoBehaviour
     public void SettingDesc(string _desc) 
     {
         desc.text = _desc;
+    }
+
+    private void menuObj()
+    {
+        menuList = new List<ClickEn>();
+        ClickEn menuClass = null;
+        foreach (EncyclopediaEnum menu in System.Enum.GetValues(typeof(EncyclopediaEnum)))
+        {
+            if (menu == EncyclopediaEnum.None || menu == EncyclopediaEnum.Max)
+                continue;
+
+            menuClass = Util.CreateObject(menuItem.gameObject, menuContent, Vector2.zero, Vector2.one).GetComponent<ClickEn>();
+            menuClass.gameObject.SetActive(true);
+            menuClass.setting(menu);
+
+            menuList.Add(menuClass);
+        }
     }
 }

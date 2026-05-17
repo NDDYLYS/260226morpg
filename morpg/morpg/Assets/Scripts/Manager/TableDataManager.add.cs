@@ -100,4 +100,58 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
         }
         return result;
     }
+
+    public string getSpeciesText(SpeciesEnum _species)
+    {
+        var text = string.Empty;
+        var species = GetTableData<Table_Species>(_species.ToString());
+        if (species.Hidden == HiddenEnum.Default)
+            text = _species.ToString().GetTableText();
+        else if (species.Hidden == HiddenEnum.Hidden)
+            text = "Hidden001".GetTableText();
+        return text;
+    }
+
+    public Color getSpeciesColor(SpeciesEnum _species)
+    {
+        var color = Color.black;
+        var savedata = GameManager.Instance.SaveData;
+        if (savedata.Species == _species)
+            color = Color.yellow;
+        else
+        {
+            if (!savedata.getSpecies(_species))
+                color = Color.gray;
+            else
+                color = Color.black;
+        }
+        return color;
+    }
+
+    public string getJobText(JobEnum _job)
+    {
+        var text = string.Empty;
+        var job = GetTableData<Table_Job>(_job.ToString());
+        if (job.Hidden == HiddenEnum.Default)
+            text = _job.ToString().GetTableText();
+        else if (job.Hidden == HiddenEnum.Hidden)
+            text = "Hidden001".GetTableText();
+        return text;
+    }
+
+    public Color getJobColor(JobEnum _job)
+    {
+        var color = Color.black;
+        var savedata = GameManager.Instance.SaveData;
+        if (savedata.Job == _job)
+            color = Color.yellow;
+        else
+        {
+            if (!savedata.getJob(_job))
+                color = Color.gray;
+            else
+                color = Color.black;
+        }
+        return color;
+    }
 }

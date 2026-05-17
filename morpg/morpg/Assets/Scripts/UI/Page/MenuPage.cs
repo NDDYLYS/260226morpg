@@ -34,6 +34,7 @@ public class MenuPage : EventProcessor
     public void OnClickClosePageButton()
     {
         GameManager.Instance.SetGameState(GameStateEnum.Play);
+        GameManager.Instance.changePlayer(speciesjob_menu.getSpecies());
         base.ClosePage();
     }
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,8 @@ public class GameManager : SingletonGameObject<GameManager>
 
     public SaveData SaveData;
     public GameStateEnum GameState;
+    private GameObject Player;
+    private SpeciesEnum beforeSpecies;
 
 
     private List<EventProcessor> UIList = new List<EventProcessor>();
@@ -151,4 +154,32 @@ public class GameManager : SingletonGameObject<GameManager>
         }
     }
 
+    public void setPlayer(GameObject _obj, SpeciesEnum _species)
+    {
+        Player = _obj;
+        beforeSpecies = _species;
+    }
+
+    public GameObject getPlayer() 
+    { 
+        return Player; 
+    }
+
+    public void changePlayer(SpeciesEnum _species)
+    {
+        if (beforeSpecies != _species)
+        {
+            var player = getPlayer();
+            var position = player.transform.position;
+            var rotation = player.transform.rotation;
+            GameObject.Destroy(player.gameObject);
+
+            var prefab = TableDataManager.Instance.GetLoadedPrefab($"Units/{_species.ToString()}");
+            var unit = Util.CreateObject(prefab, null, Vector3.zero, Vector3.one);
+            var animator = unit.transform.GetChild(0).AddComponent<player>();
+            setPlayer(unit.gameObject, _species);
+            unit.transform.position = position;
+            unit.transform.rotation = rotation;
+        }
+    }
 }

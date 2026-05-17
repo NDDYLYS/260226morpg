@@ -11,26 +11,26 @@ public class SpeciesObject : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tmp;
     [SerializeField] private Button btn;
     private SpeciesEnum species;
-    public void setting(SpeciesEnum _species)
+    private SpeciesJobMenu manager;
+    public void setting(SpeciesEnum _species, SpeciesJobMenu _manager)
     {
-        //var prefab = TableDataManager.Instance.GetLoadedPrefab($"Units/{_species.ToString()}");
-        //SpriteRenderer sr = prefab.GetComponent<SpriteRenderer>();
-        //if (sr != null)
-        //    image.sprite = sr.sprite;
         species = _species;
-        var savedata = GameManager.Instance.SaveData;
-        if (savedata.getSpecies(species))
-            tmp.text = _species.ToString().GetTableText();
-        else
-            tmp.text = "Hidden001".GetTableText();
+        manager = _manager;
         btn.onClick.AddListener(() => click(_species));
+        refresh();
     }
 
     private void click(SpeciesEnum _species)
     {
-        var savedata = GameManager.Instance.SaveData;
-        if (!savedata.getSpecies(species))
-            return;
         GameManager.Instance.SaveData.Species = species;
+        if (manager != null)
+            manager.refresh_species(species);
+    }
+
+    public void refresh()
+    {
+        var table = TableDataManager.Instance;
+        tmp.text = table.getSpeciesText(species);
+        tmp.color = table.getSpeciesColor(species);
     }
 }

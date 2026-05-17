@@ -11,9 +11,14 @@ public class JobObject : MonoBehaviour
     private JobEnum job;
     public void setting(JobEnum _job)
     {
-        tmp.text = _job.ToString().GetTableText();
-        btn.onClick.AddListener(() => click(_job));
         job = _job;
+
+        var savedata = GameManager.Instance.SaveData;
+        if (savedata.getJob(job))
+            tmp.text = job.ToString().GetTableText();
+        else
+            tmp.text = "Hidden001".GetTableText();
+        btn.onClick.AddListener(() => click(_job));
     }
 
     private void click(JobEnum _job)

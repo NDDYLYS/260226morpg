@@ -17,9 +17,13 @@ public class SpeciesObject : MonoBehaviour
         //SpriteRenderer sr = prefab.GetComponent<SpriteRenderer>();
         //if (sr != null)
         //    image.sprite = sr.sprite;
-        tmp.text = _species.ToString().GetTableText();
-        btn.onClick.AddListener(() => click(_species));
         species = _species;
+        var savedata = GameManager.Instance.SaveData;
+        if (savedata.getSpecies(species))
+            tmp.text = _species.ToString().GetTableText();
+        else
+            tmp.text = "Hidden001".GetTableText();
+        btn.onClick.AddListener(() => click(_species));
     }
 
     private void click(SpeciesEnum _species)

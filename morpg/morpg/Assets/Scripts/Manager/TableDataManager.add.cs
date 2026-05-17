@@ -79,6 +79,8 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
         var list = GetTableDataList<Table_Species>();
         foreach (var element in list) 
         {
+            if (element.Species == SpeciesEnum.Unknown)
+                continue;
             if (element.Hidden == HiddenEnum.Default)
                 result.Add(element.Species);
         }
@@ -91,6 +93,8 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
         var list = GetTableDataList<Table_Job>();
         foreach (var element in list)
         {
+            if (element.Job == JobEnum.notEmployed)
+                continue;
             if (element.Hidden == HiddenEnum.Default)
                 result.Add(element.Job);
         }

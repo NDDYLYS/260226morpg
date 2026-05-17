@@ -37,7 +37,7 @@ public class BuildManager
 
         var gameName = LocalManager.Instance.gameName;
 
-        var path = Path.GetFullPath($"F://Build/{gameName}");
+        var path = Path.GetFullPath($"D://Build/{gameName}");
 
         var platform = BuildTarget.StandaloneWindows64;
         path = string.Format("{0}/{1}", path, platform.ToString());

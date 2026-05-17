@@ -132,6 +132,12 @@ public class CustomWindow : EditorWindow
 
         species = (SpeciesEnum)EditorGUILayout.EnumPopup("species : ", species, GUILayout.ExpandWidth(true));
 
+        if (GUILayout.Button("Add Species", GUILayout.ExpandWidth(false)))
+        {
+            if (GameManager.Instance?.SaveData != null)
+                GameManager.Instance.SaveData.AddSpecies(species);
+        }
+
         if (GUILayout.Button("Change Species", GUILayout.ExpandWidth(false)))
         {
             if (GameManager.Instance?.SaveData != null)
@@ -143,6 +149,12 @@ public class CustomWindow : EditorWindow
         GUILayout.BeginHorizontal();
 
         job = (JobEnum)EditorGUILayout.EnumPopup("job : ", job, GUILayout.ExpandWidth(true));
+
+        if (GUILayout.Button("Add Job", GUILayout.ExpandWidth(false)))
+        {
+            if (GameManager.Instance?.SaveData != null)
+                GameManager.Instance.SaveData.AddJob(job);
+        }
 
         if (GUILayout.Button("Change Job", GUILayout.ExpandWidth(false)))
         {

@@ -47,6 +47,45 @@ public class SaveData
         }
     }
 
+    [SerializeField] private List<SpeciesEnum> existSpeciesList = new();
+    public IReadOnlyList<SpeciesEnum> ExistSpeciesList => existSpeciesList;
+    public void AddSpecies(SpeciesEnum _species)
+    {
+        if (!existSpeciesList.Contains(_species))
+            existSpeciesList.Add(_species);
+    }
+    public void AddSpeciesList(List<SpeciesEnum> _speciesList)
+    {
+        foreach (SpeciesEnum species in _speciesList)
+        {
+            AddSpecies(species);
+        }
+    }
+    public bool getSpecies(SpeciesEnum _species)
+    {
+        return existSpeciesList.Contains(_species);
+    }
+
+    [SerializeField] private List<JobEnum> existJobList = new();
+    public IReadOnlyList<JobEnum> ExistJobList => existJobList;
+
+    public void AddJob(JobEnum job)
+    {
+        if (!existJobList.Contains(job))
+            existJobList.Add(job);
+    }
+    public void AddJobList(List<JobEnum> _jobList) 
+    { 
+        foreach (JobEnum job in _jobList)
+        {
+            AddJob(job);
+        }
+    }
+    public bool getJob(JobEnum _job)
+    {
+        return existJobList.Contains(_job);
+    }
+
     public SaveData()
     {
         playTime = 0f;
@@ -54,7 +93,8 @@ public class SaveData
         encyclopediaList = new List<string>();
         species = SpeciesEnum.Human;
         job = JobEnum.notEmployed;
+
+        AddSpeciesList(TableDataManager.Instance.getSpeciesList());
+        AddJobList(TableDataManager.Instance.getJobList());
     }
-
-
 }

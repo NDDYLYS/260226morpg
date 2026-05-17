@@ -72,4 +72,28 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
             return _desc;
         return "Hidden002";
     }
+
+    public List<SpeciesEnum> getSpeciesList()
+    {
+        var result = new List<SpeciesEnum>();
+        var list = GetTableDataList<Table_Species>();
+        foreach (var element in list) 
+        {
+            if (element.Hidden == HiddenEnum.Default)
+                result.Add(element.Species);
+        }
+        return result;
+    }
+
+    public List<JobEnum> getJobList() 
+    {
+        var result = new List<JobEnum>();
+        var list = GetTableDataList<Table_Job>();
+        foreach (var element in list)
+        {
+            if (element.Hidden == HiddenEnum.Default)
+                result.Add(element.Job);
+        }
+        return result;
+    }
 }

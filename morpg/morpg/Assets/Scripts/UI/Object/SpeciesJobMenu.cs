@@ -1,31 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class SpeciesJobMenu : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI species;
-    [SerializeField] private TextMeshProUGUI job;
+    [SerializeField] private ScrollRect speciesScroll;
+    [SerializeField] private Transform speciesContent;
+    [SerializeField] private GameObject speciesItem;
 
-    private void OnEnable()
+    [SerializeField] private ScrollRect jobScroll;
+    [SerializeField] private Transform jobContent;
+    [SerializeField] private GameObject jobItem;
+
+    private void Awake()
     {
-        var textList = new List<string>();
-        var speciesS = TableDataManager.Instance.GetTableDataList<Table_Species>();
-        foreach (var s in speciesS)
+        settingSpecies();
+        settingJob();
+    }
+
+    private void settingSpecies()
+    {
+        SpeciesObject obj = null;
+        foreach (SpeciesEnum species in System.Enum.GetValues(typeof(SpeciesEnum)))
         {
-            textList.Add(s.CodeName.GetTableText());
+            if (species == SpeciesEnum.None || species == SpeciesEnum.Max || species == SpeciesEnum.Unknown)
+                continue;
+
+            obj = Util.CreateObject(speciesItem.gameObject, speciesContent, Vector2.zero, Vector2.one).GetComponent<SpeciesObject>();
+            obj.gameObject.SetActive(true);
+            obj.setting(species);
         }
+    }
 
-        species.text = string.Join("\n", textList);
-        textList.Clear();
-
-        var jobS = TableDataManager.Instance.GetTableDataList<Table_Job>();
-        foreach (var j in jobS)
+    private void settingJob()
+    {
+        JobObject obj = null;
+        foreach (JobEnum job in System.Enum.GetValues(typeof(JobEnum)))
         {
-            textList.Add(j.CodeName.GetTableText());
-        }
+            if (job == JobEnum.None || job == JobEnum.Max || job == JobEnum.notEmployed)
+                continue;
 
-        job.text = string.Join("\n", textList);
+            obj = Util.CreateObject(jobItem.gameObject, jobContent, Vector2.zero, Vector2.one).GetComponent<JobObject>();
+            obj.gameObject.SetActive(true);
+            obj.setting(job);
+        }
     }
 }

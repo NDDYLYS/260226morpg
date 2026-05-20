@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonGameObject<GameManager>
@@ -181,5 +183,55 @@ public class GameManager : SingletonGameObject<GameManager>
             unit.transform.position = position;
             unit.transform.rotation = rotation;
         }
+    }
+
+    private async Task<DateTime> GetNetworkTime()
+    {
+        using UnityWebRequest req =
+            UnityWebRequest.Head("https://www.google.com");
+
+        var operation = req.SendWebRequest();
+
+        while (!operation.isDone)
+            await Task.Yield();
+
+        string date = req.GetResponseHeader("date");
+
+        if (!string.IsNullOrEmpty(date))
+        {
+            return DateTime.Parse(date).ToUniversalTime();
+        }
+
+        return DateTime.MinValue;
+    }
+
+    [Button]
+    public async void getTime2()
+    {
+        var utc = await GetNetworkTime();
+        var localTime = utc.ToLocalTime();
+
+        int year = localTime.Year;
+        int month = localTime.Month;
+        int day = localTime.Day;
+        DayOfWeek dayOfWeek = localTime.DayOfWeek;
+        string koreanDay = localTime.ToString("dddd");
+
+        Debug.Log(year);
+        Debug.Log(month);
+        Debug.Log(day);
+        Debug.Log(dayOfWeek);
+        Debug.Log(koreanDay);
+
+        Debug.Log(localTime);
+    }
+
+    [Button]
+    public async void getTime()
+    {
+        var utc = await GetNetworkTime();
+        var localTime = utc.ToLocalTime();
+
+        Debug.Log(localTime);
     }
 }

@@ -76,23 +76,8 @@ public class CustomWindow : EditorWindow
 
         ScrollPosition = GUILayout.BeginScrollView(ScrollPosition);
 
-        index = EditorGUILayout.IntField("index : ", index, GUILayout.ExpandWidth(true));
-        if (index <= 1)
-            index = 1;
-        if (Constant.dataSlot < index)
-            index = Constant.dataSlot;
 
-        GUILayout.BeginHorizontal();
-
-        if (GUILayout.Button("Load", GUILayout.ExpandWidth(false)))
-            UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton(SaveLoadEnum.Load); //UGSManager.Instance.Load(index);
-
-        if (GUILayout.Button("Save", GUILayout.ExpandWidth(false)))
-            UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton(SaveLoadEnum.Save);//UGSManager.Instance.Save(index);
-
-        GUILayout.EndHorizontal();
-
-        EditorGUILayout.Space(10f);
+        DrawHeader("Base");
 
         GUILayout.BeginHorizontal();
 
@@ -111,9 +96,30 @@ public class CustomWindow : EditorWindow
 
         EditorGUILayout.Space(10f);
 
-        textValue = EditorGUILayout.TextField("text : ", textValue, GUILayout.ExpandWidth(true));
+        DrawHeader("Save&Load");
 
         GUILayout.BeginHorizontal();
+
+        index = EditorGUILayout.IntField("index : ", index, GUILayout.ExpandWidth(true));
+        if (index <= 1)
+            index = 1;
+        if (Constant.dataSlot < index)
+            index = Constant.dataSlot;
+
+        if (GUILayout.Button("Load", GUILayout.ExpandWidth(false)))
+            UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton(SaveLoadEnum.Load); //UGSManager.Instance.Load(index);
+
+        if (GUILayout.Button("Save", GUILayout.ExpandWidth(false)))
+            UIPrefabManager.Instance.SaveLoadPageProperty.OnClickOpenPageButton(SaveLoadEnum.Save);//UGSManager.Instance.Save(index);
+
+        GUILayout.EndHorizontal();
+
+        EditorGUILayout.Space(10f);
+
+        DrawHeader("Debug");
+
+        GUILayout.BeginHorizontal();
+        textValue = EditorGUILayout.TextField("text : ", textValue, GUILayout.ExpandWidth(true));
 
         if (GUILayout.Button("Log", GUILayout.ExpandWidth(false)))
             Debug.Log(textValue);
@@ -127,6 +133,8 @@ public class CustomWindow : EditorWindow
         GUILayout.EndHorizontal();
 
         EditorGUILayout.Space(10f);
+
+        DrawHeader("Species*Job");
 
         GUILayout.BeginHorizontal();
 
@@ -163,6 +171,8 @@ public class CustomWindow : EditorWindow
         }
 
         GUILayout.EndHorizontal();
+
+        DrawHeader("Encyclopedia");
 
         GUILayout.BeginHorizontal();
 
@@ -211,7 +221,7 @@ public class CustomWindow : EditorWindow
 
     public void CaptureImage()
     {
-        string folderName = string.Format("F:/Capture/{0:yy-MM-dd}", DateTime.Now);
+        string folderName = string.Format("D:/Capture/{0:yy-MM-dd}", DateTime.Now);
         if (!Directory.Exists(Path.GetFullPath(folderName)))
             Directory.CreateDirectory(Path.GetFullPath(folderName));
 
@@ -228,7 +238,7 @@ public class CustomWindow : EditorWindow
 
     public void GotoCaptureFolder()
     {
-        string folderName = string.Format("F:/Capture/{0:yy-MM-dd}", DateTime.Now);
+        string folderName = string.Format("D:/Capture/{0:yy-MM-dd}", DateTime.Now);
         if (!Directory.Exists(Path.GetFullPath(folderName)))
             Directory.CreateDirectory(Path.GetFullPath(folderName));
 
@@ -237,10 +247,22 @@ public class CustomWindow : EditorWindow
 
     public void GotoBuildFolder()
     {
-        string folderName = string.Format("F:/Build");
+        string folderName = string.Format("D:/Build");
         if (!Directory.Exists(Path.GetFullPath(folderName)))
             Directory.CreateDirectory(Path.GetFullPath(folderName));
 
         Process.Start(folderName);
+    }
+
+    private void DrawHeader(string _title)
+    {
+        EditorGUILayout.Space(10);
+
+        GUIStyle style = new GUIStyle(EditorStyles.boldLabel);
+        style.fontSize = 14;
+
+        EditorGUILayout.LabelField(_title, style);
+
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
     }
 }

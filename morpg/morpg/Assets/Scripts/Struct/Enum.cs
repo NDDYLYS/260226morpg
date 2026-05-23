@@ -149,7 +149,7 @@ public enum ArmorEnum
     Max
 }
 
-public enum EqipmentEnum
+public enum EquipmentEnum
 {
     None = -1,
     Weapon,
@@ -157,10 +157,31 @@ public enum EqipmentEnum
     Armor,
     Gloves,
     Boots,
-    LeftRing,
-    RightRIng,
-    LeftEarring,
-    RightEarring,
+    Ring,
+    Earring,
     Necklace,
+    Max
+}
+
+public enum CategoryEnum
+{
+    None = 1,
+    Consume,
+    Equipment,
+    Etc,
+    Max
+}
+
+public enum TimeEnum
+{
+    None = 1,
+    All,
+    Year,
+    Month,
+    Day,
+    DayofWeek,
+    Hours,
+    Minute,
+    Second,
     Max
 }

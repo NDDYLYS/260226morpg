@@ -206,32 +206,57 @@ public class GameManager : SingletonGameObject<GameManager>
     }
 
     [Button]
-    public async void getTime2()
+    public async Task<string> getTime(TimeEnum _time)
     {
         var utc = await GetNetworkTime();
         var localTime = utc.ToLocalTime();
 
-        int year = localTime.Year;
-        int month = localTime.Month;
-        int day = localTime.Day;
-        DayOfWeek dayOfWeek = localTime.DayOfWeek;
-        string koreanDay = localTime.ToString("dddd");
+        var text = string.Empty;
+        switch (_time)
+        {
+            case TimeEnum.All:
+                text = localTime.ToString();
+                break;
+            case TimeEnum.Year:
+                text = localTime.Year.ToString();
+                break;
+            case TimeEnum.Month:
+                text = localTime.Month.ToString();
+                break;
+            case TimeEnum.Day:
+                text = localTime.Day.ToString();
+                break;
+            case TimeEnum.DayofWeek:
+                text = localTime.DayOfWeek.ToString();
+                break;
+            case TimeEnum.Hours:
+                text = localTime.Hour.ToString();
+                break;
+            case TimeEnum.Minute:
+                text = localTime.Minute.ToString();
+                break;
+            case TimeEnum.Second:
+                text = localTime.Second.ToString();
+                break;
+            default:
+                break;
+        }
 
-        Debug.Log(year);
-        Debug.Log(month);
-        Debug.Log(day);
-        Debug.Log(dayOfWeek);
-        Debug.Log(koreanDay);
+        //int year = localTime.Year;
+        //int month = localTime.Month;
+        //int day = localTime.Day;
+        //DayOfWeek dayOfWeek = localTime.DayOfWeek;
+        //string koreanDay = localTime.ToString("dddd");
 
-        Debug.Log(localTime);
+        return text;
     }
 
-    [Button]
-    public async void getTime()
-    {
-        var utc = await GetNetworkTime();
-        var localTime = utc.ToLocalTime();
+    //[Button]
+    //public async void getTime()
+    //{
+    //    var utc = await GetNetworkTime();
+    //    var localTime = utc.ToLocalTime();
 
-        Debug.Log(localTime);
-    }
+    //    Debug.Log(localTime);
+    //}
 }

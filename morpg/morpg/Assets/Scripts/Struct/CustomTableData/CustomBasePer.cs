@@ -1,8 +1,10 @@
-﻿[System.Serializable]
+﻿using Unity.VisualScripting;
+
+[System.Serializable]
 public class CustomBasePer
 {
-    public int Base;
-    public int Per;
+    private int Base;
+    private int Per;
     
     public CustomBasePer(string value)
     {
@@ -29,5 +31,10 @@ public class CustomBasePer
         value.Base = c1.Base + c2.Base;
         value.Per = c1.Per + c2.Per;
         return value;
+    }
+
+    public string getText()
+    {
+        return $"{Base} + {Per}%";
     }
 }

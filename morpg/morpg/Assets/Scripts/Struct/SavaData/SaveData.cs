@@ -115,6 +115,21 @@ public class SaveData
         return new Dictionary<string, int>();
     }
 
+    [SerializeField] private long uniqueId;
+    public long UniqueId
+    {
+        get => uniqueId;
+        set
+        {
+            uniqueId = value;
+        }
+    }
+
+    public long setUniqueId() 
+    { 
+        return uniqueId++;
+    }
+
     public SaveData()
     {
         playTime = 0f;

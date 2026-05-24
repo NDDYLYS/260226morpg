@@ -208,7 +208,15 @@ public class CustomWindow : EditorWindow
         {
             AddRandom5Item();
         }
-        
+
+        if (GUILayout.Button("setUniqueId", GUILayout.ExpandWidth(false)))
+        {
+            if (GameManager.Instance?.SaveData != null)
+            {
+                GameManager.Instance.SaveData.setUniqueId();
+            }
+        }
+
         GUILayout.BeginHorizontal();
 
         GUILayout.EndHorizontal();

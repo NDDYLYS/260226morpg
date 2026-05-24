@@ -34,6 +34,11 @@ public class SaveLoadObject : MonoBehaviour
         }
     }
 
+    public void refresh()
+    {
+        SettingUI(Index, saveLoadEnum);
+    }
+
     public void OnClickSaveLoadButton() 
     {
         switch (saveLoadEnum)
@@ -67,6 +72,6 @@ public class SaveLoadObject : MonoBehaviour
             return;
         }
 
-        UGSManager.Instance.Load(Index);
+        UGSManager.Instance.Load(Index, this);
     }
 }

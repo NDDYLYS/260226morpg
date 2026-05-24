@@ -18,6 +18,7 @@ public class StartManager : MonoBehaviour
     }
 
     [SerializeField] private GameObject continueBtn;
+    [SerializeField] private GameObject shadow;
 
     private void Awake()
     {
@@ -63,5 +64,10 @@ public class StartManager : MonoBehaviour
 #endif
             }
         });
+    }
+
+    public void shadowInactive()
+    {
+        shadow.SetActive(false);
     }
 }

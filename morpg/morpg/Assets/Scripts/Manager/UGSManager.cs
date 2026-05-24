@@ -44,6 +44,7 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
             StartManager.Instance.refreshContinueBtn();
 
         Debug.Log("UGS All Ready");
+        StartManager.Instance.shadowInactive();
     }
 
     private async Task Login()

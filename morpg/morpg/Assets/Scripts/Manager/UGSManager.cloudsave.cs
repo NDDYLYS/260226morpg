@@ -26,7 +26,7 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         return null;
     }
 
-    public async void Save(int _index)
+    public async void Save(int _index, SaveLoadObject _obj)
     {
         if (_index <= 0)
             return;
@@ -43,9 +43,11 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         );
 
         refreshSaveData();
+        if (_obj != null)
+            _obj.refresh(saveData);
     }
 
-    public async void Load(int _index, SaveLoadObject _obj)
+    public async void Load(int _index)
     {
         if (_index <= 0)
             return;
@@ -67,9 +69,6 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         GameManager.Instance.SaveData = saveData;
         GameManager.Instance.MovingScene("2Village");
         TableDataManager.Instance.updateSavedata(saveData);
-
-        if (_obj != null)
-            _obj.refresh();
     }
 
     public async Task refreshSaveData()

@@ -21,7 +21,11 @@ public class SaveLoadObject : MonoBehaviour
 
         saveLoadEnum = _saveLoad;
         saveData = UGSManager.Instance.GetSaveData(_index);
+        refreshUI();
+    }
 
+    private void refreshUI()
+    {
         if (saveData != null)
         {
             temp.text = $"{saveData.Species.ToString().GetTableText()}/{saveData.Job.ToString().GetTableText()}";
@@ -34,9 +38,10 @@ public class SaveLoadObject : MonoBehaviour
         }
     }
 
-    public void refresh()
+    public void refresh(SaveData _savedata)
     {
-        SettingUI(Index, saveLoadEnum);
+        saveData = _savedata;
+        refreshUI();
     }
 
     public void OnClickSaveLoadButton() 
@@ -56,7 +61,7 @@ public class SaveLoadObject : MonoBehaviour
 
     private void Save() 
     {
-        UGSManager.Instance.Save(Index);
+        UGSManager.Instance.Save(Index, this);
     }
 
     private void Load() 
@@ -72,6 +77,6 @@ public class SaveLoadObject : MonoBehaviour
             return;
         }
 
-        UGSManager.Instance.Load(Index, this);
+        UGSManager.Instance.Load(Index);
     }
 }

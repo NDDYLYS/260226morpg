@@ -26,6 +26,8 @@ public class CustomWindow : EditorWindow
     private JobEnum job { get; set; }
     private string encyclopedia {  get; set; }
 
+    private CategoryEnum category { get; set; }
+
 
     [MenuItem("CustomWindow/Open Window %#q")]
     static void OpenWindow()
@@ -196,7 +198,49 @@ public class CustomWindow : EditorWindow
 
         GUILayout.EndHorizontal();
 
+        EditorGUILayout.Space(10f);
+
+        DrawHeader("Item");
+
+        category = (CategoryEnum)EditorGUILayout.EnumPopup("category : ", category, GUILayout.ExpandWidth(true));
+
+        if (GUILayout.Button("Add Item 5", GUILayout.ExpandWidth(false)))
+        {
+            AddRandom5Item();
+        }
+        
+        GUILayout.BeginHorizontal();
+
+        GUILayout.EndHorizontal();
+
+        //EditorGUILayout.Space(10f);
+        //DrawHeader("");
+        //GUILayout.BeginHorizontal();
+        //GUILayout.EndHorizontal();
+
         GUILayout.EndScrollView();
+    }
+
+    private void AddRandom5Item()
+    {
+        var all = TableDataManager.Instance.GetTableDataList<Table_Item>();
+        all = Util.ShuffleAlgorithm(all, 10);
+
+        for (var i = 0; i < 5; i++)
+        {
+            if (all[i].Category != category)
+                return;
+
+            if (GameManager.Instance?.SaveData != null)
+            {
+                var noAdd = GameManager.Instance.SaveData.AddEncyclopedia(all[i].CodeName);
+                //if (!noAdd)
+                //{
+                //    all = Util.ShuffleAlgorithm(all, 10);
+                //    i--;
+                //}
+            }
+        }
     }
 
 

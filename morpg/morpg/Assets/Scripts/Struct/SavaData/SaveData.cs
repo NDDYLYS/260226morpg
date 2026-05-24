@@ -86,6 +86,35 @@ public class SaveData
         return existJobList.Contains(_job);
     }
 
+    [SerializeField] private List<string> existItemList = new();
+    public IReadOnlyList<string> ExistItemList => existItemList;
+    public void AddItemList(string _item)
+    {
+        existItemList.Add(_item);
+    }
+    public void AddItemList(List<string> _itemList)
+    {
+        foreach (var item in _itemList)
+        {
+            AddItemList(item);
+        }
+    }
+    public Dictionary<string, int>  getItemList(CategoryEnum _category)
+    {
+        switch (_category)
+        {
+            case CategoryEnum.Consume:
+            case CategoryEnum.Etc:
+                break;
+            case CategoryEnum.Equipment:
+                break;
+            default:
+                break;
+        }
+
+        return new Dictionary<string, int>();
+    }
+
     public SaveData()
     {
         playTime = 0f;

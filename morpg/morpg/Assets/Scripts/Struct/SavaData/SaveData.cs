@@ -86,35 +86,6 @@ public class SaveData
         return existJobList.Contains(_job);
     }
 
-    [SerializeField] private List<string> existItemList = new();
-    public IReadOnlyList<string> ExistItemList => existItemList;
-    public void AddItemList(string _item)
-    {
-        existItemList.Add(_item);
-    }
-    public void AddItemList(List<string> _itemList)
-    {
-        foreach (var item in _itemList)
-        {
-            AddItemList(item);
-        }
-    }
-    public Dictionary<string, int>  getItemList(CategoryEnum _category)
-    {
-        switch (_category)
-        {
-            case CategoryEnum.Consume:
-            case CategoryEnum.Etc:
-                break;
-            case CategoryEnum.Equipment:
-                break;
-            default:
-                break;
-        }
-
-        return new Dictionary<string, int>();
-    }
-
     [SerializeField] private long uniqueId;
     public long UniqueId
     {
@@ -124,11 +95,42 @@ public class SaveData
             uniqueId = value;
         }
     }
-
     public long setUniqueId() 
     { 
         return uniqueId++;
     }
+
+    [SerializeField] private List<ItemData> itemList = new();
+    public List<ItemData> ItemList
+    {
+        get => itemList;
+        set => itemList = value;
+    }
+
+    public int getItemCount(string _codename)
+    {
+        var count = 0;
+        foreach (var item in ItemList)
+        {
+            if (item.TableItem.CodeName == _codename)
+                count = item.Count;
+        }
+
+        return count;
+    }
+    public void AddItemList(ItemData _item)
+    {
+        var tableItem = TableDataManager.Instance.GetTableData<Table_Item>(_item.TableItem.CodeName);
+        if (tableItem == null)
+            return;
+        var index = itemList.FindIndex(x => x.TableItem.CodeName == _item.TableItem.CodeName);
+
+        if (0 <= index)
+            itemList[index] = _item;
+        else
+            itemList.Add(_item);
+    }
+
 
     public SaveData()
     {
@@ -140,5 +142,8 @@ public class SaveData
 
         AddSpeciesList(TableDataManager.Instance.getSpeciesList());
         AddJobList(TableDataManager.Instance.getJobList());
+
+        itemList = new List<ItemData>();
+        uniqueId = 1;
     }
 }

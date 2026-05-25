@@ -204,7 +204,7 @@ public class CustomWindow : EditorWindow
 
         category = (CategoryEnum)EditorGUILayout.EnumPopup("category : ", category, GUILayout.ExpandWidth(true));
 
-        if (GUILayout.Button("Add Item 5", GUILayout.ExpandWidth(false)))
+        if (GUILayout.Button("Add Random 5 Item", GUILayout.ExpandWidth(false)))
         {
             AddRandom5Item();
         }
@@ -234,20 +234,18 @@ public class CustomWindow : EditorWindow
         var all = TableDataManager.Instance.GetTableDataList<Table_Item>();
         all = Util.ShuffleAlgorithm(all, 10);
 
-        for (var i = 0; i < 5; i++)
+        for (var add = 0; add < 5;)
         {
-            if (all[i].Category != category)
-                return;
-
-            if (GameManager.Instance?.SaveData != null)
+            if (all[add].Category == category)
             {
-                var noAdd = GameManager.Instance.SaveData.AddEncyclopedia(all[i].CodeName);
-                //if (!noAdd)
-                //{
-                //    all = Util.ShuffleAlgorithm(all, 10);
-                //    i--;
-                //}
+                if (GameManager.Instance?.SaveData != null)
+                {
+                    Util.AddItem(all[add].CodeName);
+                    add++;
+                }
             }
+            else
+                all = Util.ShuffleAlgorithm(all, 10);
         }
     }
 

@@ -4,15 +4,70 @@ using UnityEngine;
 
 public class EquipmentMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private CategoryEnum category;
+    [SerializeField] private List<ClickEn> menuList;
+
+    public void onClickAllButton()
     {
-        
+        category = CategoryEnum.Max;
+        clickedMenuFocus();
+
+        var itemList = TableDataManager.Instance.getItemList(CategoryEnum.Max);
+        var textList = new List<string>();
+        foreach (var item in itemList)
+        {
+            textList.Add($"{item.TableItem.CodeName}({item.UniqueId})x{item.Count}");
+        }
+        Debug.Log(string.Join("/", textList));
     }
 
-    // Update is called once per frame
-    void Update()
+    public void onClickConsumeButton()
     {
-        
+        category = CategoryEnum.Consume;
+        clickedMenuFocus();
+
+        var itemList = TableDataManager.Instance.getItemList(CategoryEnum.Consume); 
+        var textList = new List<string>();
+        foreach (var item in itemList)
+        {
+            textList.Add($"{item.TableItem.CodeName}({item.UniqueId})x{item.Count}");
+        }
+        Debug.Log(string.Join("/", textList));
+    }
+
+    public void onClickEquipmentButton()
+    {
+        category = CategoryEnum.Equipment;
+        clickedMenuFocus();
+
+        var itemList = TableDataManager.Instance.getItemList(CategoryEnum.Equipment); 
+        var textList = new List<string>();
+        foreach (var item in itemList)
+        {
+            textList.Add($"{item.TableItem.CodeName}({item.UniqueId})x{item.Count}");
+        }
+        Debug.Log(string.Join("/", textList));
+    }
+
+    public void onClickEtcButton()
+    {
+        category = CategoryEnum.Etc;
+        clickedMenuFocus();
+
+        var itemList = TableDataManager.Instance.getItemList(CategoryEnum.Etc); 
+        var textList = new List<string>();
+        foreach (var item in itemList)
+        {
+            textList.Add($"{item.TableItem.CodeName}({item.UniqueId})x{item.Count}");
+        }
+        Debug.Log(string.Join("/", textList));
+    }
+
+    private void clickedMenuFocus()
+    {
+        foreach (var clicked in menuList)
+        {
+            clicked.menuSelect(category);
+        }
     }
 }

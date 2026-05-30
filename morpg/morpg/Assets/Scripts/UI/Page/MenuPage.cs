@@ -11,7 +11,7 @@ public class MenuPage : EventProcessor
 {
     [SerializeField] private TextMeshProUGUI playTime;
     [SerializeField] private GameObject submenu;
-    [SerializeField] private EquimentMenu equipment_menu;
+    [SerializeField] private EquipmentMenu equipment_menu;
     [SerializeField] private SpeciesJobMenu speciesjob_menu;
     [SerializeField] private EncyclopediaMenu encyclopedia_menu;
 

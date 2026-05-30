@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ClickEn : MonoBehaviour
 {
     [SerializeField] private EncyclopediaEnum menu;
+    [SerializeField] private CategoryEnum category;
     [SerializeField] private Button btn;
     [SerializeField] private TextMeshProUGUI tmp;
     [SerializeField] private EncyclopediaMenu manager;
@@ -14,6 +15,14 @@ public class ClickEn : MonoBehaviour
     public void menuSelect(EncyclopediaEnum _menu)
     {
         if (menu == _menu)
+            tmp.color = Color.white;
+        else
+            tmp.color = Color.black;
+    }
+
+    public void menuSelect(CategoryEnum _category)
+    {
+        if (category == _category)
             tmp.color = Color.white;
         else
             tmp.color = Color.black;

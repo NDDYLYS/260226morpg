@@ -1,66 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentMenu : MonoBehaviour
 {
     private CategoryEnum category;
     [SerializeField] private List<ClickEn> menuList;
 
+    [Header("part")]
+    [SerializeField] private ScrollRect partScrollRect;
+    [SerializeField] private Transform partContent;
+    [SerializeField] private EquipmentObject partItem;
+
+
+    [Header("item")]
+    [SerializeField] private ScrollRect itemScrollRect;
+    [SerializeField] private Transform itemContent;
+    [SerializeField] private EquipmentItem itemItem;
+
+    private Stack<EquipmentObject> objectPool; // 미사용
+    private List<EquipmentObject> objectList; // 사용 중
+
+    private Stack<EquipmentItem> objectPool2; // 미사용
+    private List<EquipmentItem> objectList2; // 사용 중
+
+    private void Awake()
+    {
+        objectPool = new Stack<EquipmentObject>();
+        objectList = new List<EquipmentObject>();
+
+        objectPool2 = new Stack<EquipmentItem>();
+        objectList2 = new List<EquipmentItem>();
+    }
+
     public void onClickAllButton()
     {
         category = CategoryEnum.Max;
         clickedMenuFocus();
-
-        var itemList = TableDataManager.Instance.getItemList(CategoryEnum.Max);
-        var textList = new List<string>();
-        foreach (var item in itemList)
-        {
-            textList.Add($"{item.TableItem.CodeName}({item.UniqueId})x{item.Count}");
-        }
-        Debug.Log(string.Join("/", textList));
+        changeList();
     }
 
     public void onClickConsumeButton()
     {
         category = CategoryEnum.Consume;
         clickedMenuFocus();
-
-        var itemList = TableDataManager.Instance.getItemList(CategoryEnum.Consume); 
-        var textList = new List<string>();
-        foreach (var item in itemList)
-        {
-            textList.Add($"{item.TableItem.CodeName}({item.UniqueId})x{item.Count}");
-        }
-        Debug.Log(string.Join("/", textList));
+        changeList();
     }
 
     public void onClickEquipmentButton()
     {
         category = CategoryEnum.Equipment;
         clickedMenuFocus();
-
-        var itemList = TableDataManager.Instance.getItemList(CategoryEnum.Equipment); 
-        var textList = new List<string>();
-        foreach (var item in itemList)
-        {
-            textList.Add($"{item.TableItem.CodeName}({item.UniqueId})x{item.Count}");
-        }
-        Debug.Log(string.Join("/", textList));
+        changeList();
     }
 
     public void onClickEtcButton()
     {
         category = CategoryEnum.Etc;
         clickedMenuFocus();
+        changeList();
 
-        var itemList = TableDataManager.Instance.getItemList(CategoryEnum.Etc); 
-        var textList = new List<string>();
-        foreach (var item in itemList)
-        {
-            textList.Add($"{item.TableItem.CodeName}({item.UniqueId})x{item.Count}");
-        }
-        Debug.Log(string.Join("/", textList));
+        //var itemList = TableDataManager.Instance.getItemList(CategoryEnum.Etc); 
+        //var textList = new List<string>();
+        //foreach (var item in itemList)
+        //{
+        //    textList.Add($"{item.TableItem.CodeName}({item.UniqueId})x{item.Count}");
+        //}
+        //Debug.Log(string.Join("/", textList));
     }
 
     private void clickedMenuFocus()
@@ -69,5 +76,47 @@ public class EquipmentMenu : MonoBehaviour
         {
             clicked.menuSelect(category);
         }
+    }
+
+    private void changeList()
+    {
+        objectPoolOff();
+
+        if (category != CategoryEnum.Equipment)
+            return;
+
+        foreach (EquipmentEnum equipment in EquipmentEnum.GetValues(typeof(EquipmentEnum)))
+        {
+            if (equipment == EquipmentEnum.None || equipment == EquipmentEnum.Max)
+            continue;
+
+            var obj = objectPoolOn();
+            obj.SettingUI(equipment.ToString(), this);
+        }
+    }
+
+    private void objectPoolOff()
+    {
+        foreach (var obj in objectList)
+        {
+            obj.gameObject.SetActive(false);
+            objectPool.Push(obj);
+        }
+        objectList.Clear();
+    }
+
+    private EquipmentObject objectPoolOn()
+    {
+        EquipmentObject obj = null;
+        if (1 <= objectPool.Count)
+            obj = objectPool.Pop();
+        else
+            obj = Util.CreateObject(partItem.gameObject, partContent, Vector2.zero, Vector2.one).GetComponent<EquipmentObject>();
+
+        obj.gameObject.SetActive(true);
+        objectList.Add(obj);
+
+        obj.transform.SetAsLastSibling();
+        return obj;
     }
 }

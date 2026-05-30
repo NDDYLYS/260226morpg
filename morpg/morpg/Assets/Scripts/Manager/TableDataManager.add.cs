@@ -154,4 +154,25 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
         }
         return color;
     }
+
+    public List<ItemData> getItemList(CategoryEnum _category)
+    {
+        var savedata = GameManager.Instance.SaveData;
+        List<ItemData> list = savedata.ItemList;
+        List<ItemData> list2 = new List<ItemData>();
+        if (_category == CategoryEnum.Max)
+            return list;
+        else
+        {
+            foreach (var element in list)
+            {
+                if (element.TableItem.Category == _category)
+                {
+                    list2.Add(element);
+                }
+            }
+        }
+
+        return list2;
+    }
 }

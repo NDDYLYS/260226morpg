@@ -11,12 +11,15 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : SingletonGameObject<GameManager>
 {
     public event Action<EventKind> EventAction;
 
     [SerializeField] private string currentScene;
+    [SerializeField] private Image image;
+
     public string CurrentScene
     {
         get { return currentScene; }
@@ -128,13 +131,57 @@ public class GameManager : SingletonGameObject<GameManager>
         return GameState == _state;
     }
 
+    public void MovingScene(string _scene)
+    {
+        StartCoroutine(MovingSceneCoroutine(_scene));
+    }
+
     /// <summary>
     /// 씬 이동
     /// </summary>
     /// <param name="_scene"></param>
-    public void MovingScene(string _scene)
+    private IEnumerator MovingSceneCoroutine(string _scene)
     {
-        StartCoroutine(LoadAsynchronously(_scene));
+        if (image != null)
+        {
+            image.gameObject.SetActive(true);
+
+            yield return Close();
+
+            yield return LoadAsynchronously(_scene);
+
+            yield return Open();
+
+            image.gameObject.SetActive(false);
+        }
+
+        yield return null;
+    }
+
+    private IEnumerator Close()
+    {
+        var t = 1f;
+
+        while (t > 0)
+        {
+            t -= Time.deltaTime;
+            image.material.SetFloat("_Radius", Mathf.Clamp01(t));
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator Open()
+    {
+        var t = 0f;
+
+        while (t < 1)
+        {
+            t += Time.deltaTime;
+            image.material.SetFloat("_Radius", Mathf.Clamp01(t));
+
+            yield return null;
+        }
     }
 
     private IEnumerator LoadAsynchronously(string sceneIndex)
@@ -154,6 +201,12 @@ public class GameManager : SingletonGameObject<GameManager>
 
             yield return null;
         }
+    }
+
+    public void setImg(Image _image)
+    {
+        image = _image;
+        image.gameObject.SetActive(false);
     }
 
     public void setPlayer(GameObject _obj, SpeciesEnum _species)

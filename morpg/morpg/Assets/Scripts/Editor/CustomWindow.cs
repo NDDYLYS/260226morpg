@@ -202,7 +202,7 @@ public class CustomWindow : EditorWindow
 
         DrawHeader("Item");
 
-        category = (CategoryEnum)EditorGUILayout.EnumPopup("category : ", category, GUILayout.ExpandWidth(true));
+        // category = (CategoryEnum)EditorGUILayout.EnumPopup("category : ", category, GUILayout.ExpandWidth(true));
 
         if (GUILayout.Button("Add Random 5 Item", GUILayout.ExpandWidth(false)))
         {
@@ -236,16 +236,16 @@ public class CustomWindow : EditorWindow
 
         for (var add = 0; add < 5;)
         {
-            if (all[add].Category == category)
-            {
+            //if (all[add].Category == category)
+            //{
                 if (GameManager.Instance?.SaveData != null)
                 {
                     Util.AddItem(all[add].CodeName);
                     add++;
                 }
-            }
-            else
-                all = Util.ShuffleAlgorithm(all, 10);
+            //}
+            //else
+            //    all = Util.ShuffleAlgorithm(all, 10);
         }
     }
 

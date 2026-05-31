@@ -83,17 +83,18 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
         var slot = Constant.dataSlot;
         for (var i = 0; i < slot; i++) 
         {
-            var keys = new HashSet<string> { $"PLAYER_SAVE_{i}" };
+            var index = i + 1;
+            var keys = new HashSet<string> { $"PLAYER_SAVE_{index}" };
             var result = await CloudSaveService.Instance.Data.Player.LoadAsync(keys);
 
-            if (!result.ContainsKey($"PLAYER_SAVE_{i}"))
+            if (!result.ContainsKey($"PLAYER_SAVE_{index}"))
             {
-                saveDataDics.Add(i, null);
+                saveDataDics.Add(index, null);
             }
             else 
             {
-                var saveData = result[$"PLAYER_SAVE_{i}"].Value.GetAs<SaveData>();
-                saveDataDics.Add(i, saveData);
+                var saveData = result[$"PLAYER_SAVE_{index}"].Value.GetAs<SaveData>();
+                saveDataDics.Add(index, saveData);
 
                 returnBool = true;
             }
@@ -103,5 +104,26 @@ public partial class UGSManager : SingletonGameObject<UGSManager>
     public bool getReturnBool() 
     {
         return returnBool;
+    }
+
+    [Button]
+    public async void debug()
+    {
+        var data = await CloudSaveService.Instance.Data.Player.LoadAllAsync();
+
+        foreach (var item in data)
+        {
+            Debug.Log($"Key : {item.Key}");
+        }
+    }
+
+    [Button]
+    public async void debug2()
+    {
+        var data = await CloudSaveService.Instance.Data.Player.LoadAsync(
+            new HashSet<string> { "PLAYER_SAVE_12" }
+        );
+
+        Debug.Log(data.ContainsKey("PLAYER_SAVE_12"));
     }
 }

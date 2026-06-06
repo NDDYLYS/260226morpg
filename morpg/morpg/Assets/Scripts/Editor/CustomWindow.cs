@@ -174,6 +174,9 @@ public class CustomWindow : EditorWindow
 
         GUILayout.EndHorizontal();
 
+
+        EditorGUILayout.Space(10f);
+
         DrawHeader("Encyclopedia");
 
         GUILayout.BeginHorizontal();
@@ -198,9 +201,12 @@ public class CustomWindow : EditorWindow
 
         GUILayout.EndHorizontal();
 
+
         EditorGUILayout.Space(10f);
 
         DrawHeader("Item");
+
+        GUILayout.BeginHorizontal();
 
         // category = (CategoryEnum)EditorGUILayout.EnumPopup("category : ", category, GUILayout.ExpandWidth(true));
 
@@ -217,7 +223,10 @@ public class CustomWindow : EditorWindow
             }
         }
 
-        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Debug ItemList", GUILayout.ExpandWidth(false)))
+        {
+            DebugItemList();
+        }
 
         GUILayout.EndHorizontal();
 
@@ -227,6 +236,23 @@ public class CustomWindow : EditorWindow
         //GUILayout.EndHorizontal();
 
         GUILayout.EndScrollView();
+    }
+
+    private void DebugItemList()
+    {
+        if (GameManager.Instance?.SaveData != null)
+        {
+            var textList = new List<string>();
+            var savedata = GameManager.Instance.SaveData;
+            textList.Add($"ItemList : {savedata.ItemList.Count}");
+
+            foreach (var item in savedata.ItemList)
+            {
+                textList.Add($"{item.TableItem.CodeName}({item.UniqueId}) - x{item.Count}");
+            }
+
+            Debug.Log(string.Join("\n", textList));
+        }
     }
 
     private void AddRandom5Item()

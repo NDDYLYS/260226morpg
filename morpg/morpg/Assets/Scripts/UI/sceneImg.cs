@@ -10,6 +10,6 @@ public class sceneImg : MonoBehaviour
         var img = GetComponent<Image>();
         if (img == null )
             return;
-        GameManager.Instance.setImg(img);
+        StartCoroutine(GameManager.Instance.setImg(img));
     }
 }

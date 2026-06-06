@@ -144,15 +144,9 @@ public class GameManager : SingletonGameObject<GameManager>
     {
         if (image != null)
         {
-            image.gameObject.SetActive(true);
-
             yield return Close();
 
             yield return LoadAsynchronously(_scene);
-
-            yield return Open();
-
-            image.gameObject.SetActive(false);
         }
 
         yield return null;
@@ -160,6 +154,8 @@ public class GameManager : SingletonGameObject<GameManager>
 
     private IEnumerator Close()
     {
+        image.gameObject.SetActive(true);
+
         var t = 1f;
 
         while (t > 0)
@@ -182,6 +178,8 @@ public class GameManager : SingletonGameObject<GameManager>
 
             yield return null;
         }
+
+        image.gameObject.SetActive(false);
     }
 
     private IEnumerator LoadAsynchronously(string sceneIndex)
@@ -201,12 +199,15 @@ public class GameManager : SingletonGameObject<GameManager>
 
             yield return null;
         }
+
+        yield return Open();
     }
 
-    public void setImg(Image _image)
+    public IEnumerator setImg(Image _image)
     {
         image = _image;
-        image.gameObject.SetActive(false);
+
+        yield return Open();
     }
 
     public void setPlayer(GameObject _obj, SpeciesEnum _species)

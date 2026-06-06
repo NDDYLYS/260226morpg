@@ -123,12 +123,19 @@ public class SaveData
         var tableItem = TableDataManager.Instance.GetTableData<Table_Item>(_item.TableItem.CodeName);
         if (tableItem == null)
             return;
-        var index = itemList.FindIndex(x => x.TableItem.CodeName == _item.TableItem.CodeName);
 
-        if (0 <= index)
-            itemList[index] = _item;
+        //if (0 <= index)
+        //    itemList[index] = _item;
+        //else
+        //    itemList.Add(_item);
+
+        if (tableItem.Category == CategoryEnum.Equipment)
+            ItemList.Add(_item);
         else
-            itemList.Add(_item);
+        {
+            var index = itemList.FindIndex(x => x.TableItem.CodeName == _item.TableItem.CodeName);
+            ItemList[index] = _item;
+        }
     }
 
 

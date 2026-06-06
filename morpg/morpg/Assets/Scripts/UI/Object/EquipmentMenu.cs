@@ -82,16 +82,21 @@ public class EquipmentMenu : MonoBehaviour
     {
         objectPoolOff();
 
-        if (category != CategoryEnum.Equipment)
-            return;
-
-        foreach (EquipmentEnum equipment in EquipmentEnum.GetValues(typeof(EquipmentEnum)))
+        if (category == CategoryEnum.Equipment)
         {
-            if (equipment == EquipmentEnum.None || equipment == EquipmentEnum.Max)
-            continue;
+            foreach (EquipmentEnum equipment in EquipmentEnum.GetValues(typeof(EquipmentEnum)))
+            {
+                if (equipment == EquipmentEnum.None || equipment == EquipmentEnum.Max)
+                    continue;
 
-            var obj = objectPoolOn();
-            obj.SettingUI(equipment.ToString(), this);
+                var obj = objectPoolOn();
+                obj.SettingUI(equipment.ToString(), this);
+            }
+        }
+        else
+        {
+            var items = TableDataManager.Instance.getItemList(category);
+            changedItemList(items);
         }
     }
 
@@ -118,5 +123,41 @@ public class EquipmentMenu : MonoBehaviour
 
         obj.transform.SetAsLastSibling();
         return obj;
+    }
+
+    private void objectPool2Off()
+    {
+        foreach (var obj in objectList2)
+        {
+            obj.gameObject.SetActive(false);
+            objectPool2.Push(obj);
+        }
+        objectList2.Clear();
+    }
+
+    private EquipmentItem objectPool2On()
+    {
+        EquipmentItem obj = null;
+        if (1 <= objectPool2.Count)
+            obj = objectPool2.Pop();
+        else
+            obj = Util.CreateObject(itemItem.gameObject, itemContent, Vector2.zero, Vector2.one).GetComponent<EquipmentItem>();
+
+        obj.gameObject.SetActive(true);
+        objectList2.Add(obj);
+
+        obj.transform.SetAsLastSibling();
+        return obj;
+    }
+
+    public void changedItemList(List<ItemData> _itemList)
+    {
+        objectPool2Off();
+
+        foreach (var item in _itemList)
+        {
+            var obj = objectPool2On();
+            obj.SettingUI(item);
+        }
     }
 }

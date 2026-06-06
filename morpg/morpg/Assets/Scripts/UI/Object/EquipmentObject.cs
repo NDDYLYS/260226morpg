@@ -20,6 +20,9 @@ public class EquipmentObject : MonoBehaviour
 
     public void OnClickPartButton()
     {
-        Debug.Log($"item-equipment-{part}");
+        var partE = Util.GetEnumType<EquipmentEnum>(part);
+        var items = TableDataManager.Instance.getEquipmentList(partE);
+
+        menu.changedItemList(items);
     }
 }

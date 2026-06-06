@@ -152,6 +152,7 @@ public enum ArmorEnum
 public enum EquipmentEnum
 {
     None = -1,
+    All,
     Weapon,
     Head,
     Armor,

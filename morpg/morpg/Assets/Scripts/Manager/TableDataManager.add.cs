@@ -175,4 +175,25 @@ public partial class TableDataManager : SingletonGameObject<TableDataManager>
 
         return list2;
     }
+
+    public List<ItemData> getEquipmentList(EquipmentEnum _part)
+    {
+        var savedata = GameManager.Instance.SaveData;
+        List<ItemData> list = savedata.ItemList;
+        List<ItemData> list2 = new List<ItemData>();
+        if (_part == EquipmentEnum.All)
+            return list;
+        else
+        {
+            foreach (var element in list)
+            {
+                if (element.TableItem.Equipment == _part)
+                {
+                    list2.Add(element);
+                }
+            }
+        }
+
+        return list2;
+    }
 }

@@ -11,11 +11,13 @@ public class player : MonoBehaviour
     [SerializeField] private List<Tilemap> wallTilemapList;
     [SerializeField] private Tilemap wallTilemap; // 이동 불가 타일맵
     private Animator animator;
+    private GameObject playerObj;
 
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        playerObj = transform.parent.gameObject;
     }
 
     private void Update()
@@ -92,7 +94,7 @@ public class player : MonoBehaviour
 
         if (CanMove(nextPos))
         {
-            transform.position = nextPos;
+            playerObj.transform.position = nextPos;
         }
     }
 

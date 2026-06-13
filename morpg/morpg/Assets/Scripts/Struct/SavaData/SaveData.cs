@@ -124,17 +124,15 @@ public class SaveData
         if (tableItem == null)
             return;
 
-        //if (0 <= index)
-        //    itemList[index] = _item;
-        //else
-        //    itemList.Add(_item);
-
         if (tableItem.Category == CategoryEnum.Equipment)
             ItemList.Add(_item);
         else
         {
             var index = itemList.FindIndex(x => x.TableItem.CodeName == _item.TableItem.CodeName);
-            ItemList[index] = _item;
+            if (0 <= index)
+                ItemList[index] = _item;
+            else
+                ItemList.Add(_item);
         }
     }
 

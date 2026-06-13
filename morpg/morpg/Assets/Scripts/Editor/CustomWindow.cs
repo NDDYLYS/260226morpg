@@ -188,9 +188,10 @@ public class CustomWindow : EditorWindow
             if (GameManager.Instance?.SaveData != null)
             {
                 var encyclopediaT = TableDataManager.Instance.GetTableData<Table_Encyclopedia>(encyclopedia);
-                if (encyclopediaT == null)
-                    return;
-                GameManager.Instance.SaveData.AddEncyclopedia(encyclopedia);
+                if (encyclopediaT != null)
+                {
+                    GameManager.Instance.SaveData.AddEncyclopedia(encyclopedia);
+                }
             }
         }
 
@@ -239,6 +240,11 @@ public class CustomWindow : EditorWindow
             AddRandom10Equipment();
         }
 
+        if (GUILayout.Button("Add Random 10 Consume", GUILayout.ExpandWidth(false)))
+        {
+            AddRandom10Consume();
+        }
+
         //if (GUILayout.Button("setUniqueId", GUILayout.ExpandWidth(false)))
         //{
         //    if (GameManager.Instance?.SaveData != null)
@@ -261,6 +267,27 @@ public class CustomWindow : EditorWindow
 
         GUILayout.EndScrollView();
     }
+
+    private void AddRandom10Consume()
+    {
+        var all = TableDataManager.Instance.GetTableDataList<Table_Item>();
+        all = Util.ShuffleAlgorithm(all, 10);
+
+        for (var add = 0; add < 10;)
+        {
+            if (all[add].Category == CategoryEnum.Consume)
+            {
+                if (GameManager.Instance?.SaveData != null)
+                {
+                    Util.AddItem(all[add].CodeName, 500);
+                    add++;
+                }
+            }
+            else
+                all = Util.ShuffleAlgorithm(all, 10);
+        }
+    }
+
     private void AddRandom10Equipment()
     {
         var all = TableDataManager.Instance.GetTableDataList<Table_Item>();

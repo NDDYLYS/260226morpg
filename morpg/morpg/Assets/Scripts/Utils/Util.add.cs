@@ -7,7 +7,7 @@ public static partial class Util
     //    var prefab = UIPrefabManager.Instance.MessageBoxProperty.OnClickOpenPageButton(_codename);
     //}
 
-    public static void AddItem(string _codename)
+    public static void AddItem(string _codename, int _count = 1)
     {
         var savedata = GameManager.Instance.SaveData;
         if (savedata == null)
@@ -31,8 +31,14 @@ public static partial class Util
                 var count = savedata.getItemCount(_codename);
                 if (count <= 0)
                     count = 1;
-                else if (0 < count && count <= Constant.itemStackMaximum)
-                    count++;
+                else if (0 < count)
+                {
+                    var temp = count + _count;
+                    if (Constant.itemStackMaximum < temp)
+                        count = Constant.itemStackMaximum;
+                }
+                else if (Constant.itemStackMaximum < count)
+                    count = Constant.itemStackMaximum;
                 itemData.Count = count;
                 break;
         }

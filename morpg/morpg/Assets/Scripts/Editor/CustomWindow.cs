@@ -230,12 +230,55 @@ public class CustomWindow : EditorWindow
 
         GUILayout.EndHorizontal();
 
+        GUILayout.BeginHorizontal();
+
+        // category = (CategoryEnum)EditorGUILayout.EnumPopup("category : ", category, GUILayout.ExpandWidth(true));
+
+        if (GUILayout.Button("Add Random 10 Equipment", GUILayout.ExpandWidth(false)))
+        {
+            AddRandom10Equipment();
+        }
+
+        //if (GUILayout.Button("setUniqueId", GUILayout.ExpandWidth(false)))
+        //{
+        //    if (GameManager.Instance?.SaveData != null)
+        //    {
+        //        GameManager.Instance.SaveData.setUniqueId();
+        //    }
+        //}
+
+        //if (GUILayout.Button("Debug ItemList", GUILayout.ExpandWidth(false)))
+        //{
+        //    DebugItemList();
+        //}
+
+        GUILayout.EndHorizontal();
+
         //EditorGUILayout.Space(10f);
         //DrawHeader("");
         //GUILayout.BeginHorizontal();
         //GUILayout.EndHorizontal();
 
         GUILayout.EndScrollView();
+    }
+    private void AddRandom10Equipment()
+    {
+        var all = TableDataManager.Instance.GetTableDataList<Table_Item>();
+        all = Util.ShuffleAlgorithm(all, 10);
+
+        for (var add = 0; add < 10;)
+        {
+            if (all[add].Category == CategoryEnum.Equipment)
+            {
+                if (GameManager.Instance?.SaveData != null)
+                {
+                    Util.AddItem(all[add].CodeName);
+                    add++;
+                }
+            }
+            else
+                all = Util.ShuffleAlgorithm(all, 10);
+        }
     }
 
     private void DebugItemList()

@@ -154,6 +154,7 @@ public enum EquipmentEnum
     None = -1,
     All,
     Weapon,
+    Shield,
     Head,
     Armor,
     Gloves,
@@ -184,5 +185,15 @@ public enum TimeEnum
     Hours,
     Minute,
     Second,
+    Max
+}
+
+public enum UnitEnum
+{
+    None = 1,
+    Player,
+    AIUnit1,
+    AIUnit2,
+    AIUnit3,
     Max
 }

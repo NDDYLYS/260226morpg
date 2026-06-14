@@ -28,6 +28,8 @@ public class CustomWindow : EditorWindow
 
     private CategoryEnum category { get; set; }
 
+    private int uniqueId { get; set; }
+
 
     [MenuItem("CustomWindow/Open Window %#q")]
     static void OpenWindow()
@@ -257,6 +259,40 @@ public class CustomWindow : EditorWindow
         //{
         //    DebugItemList();
         //}
+
+        GUILayout.EndHorizontal();
+
+        EditorGUILayout.Space(10f);
+
+        DrawHeader("Equipment");
+        
+        GUILayout.BeginHorizontal();
+
+        uniqueId = EditorGUILayout.IntField("uniqueId : ", uniqueId, GUILayout.ExpandWidth(true));
+
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+
+        if (GUILayout.Button("PlayerEquipment", GUILayout.ExpandWidth(false)))
+        {
+
+        }
+
+        if (GUILayout.Button("AIUnit1Equipment", GUILayout.ExpandWidth(false)))
+        {
+
+        }
+
+        if (GUILayout.Button("AIUnit2Equipment", GUILayout.ExpandWidth(false)))
+        {
+
+        }
+
+        if (GUILayout.Button("AIUnit3Equipment", GUILayout.ExpandWidth(false)))
+        {
+
+        }
 
         GUILayout.EndHorizontal();
 

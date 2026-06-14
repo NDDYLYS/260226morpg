@@ -136,6 +136,46 @@ public class SaveData
         }
     }
 
+    [SerializeField] private Dictionary<UnitEnum, Dictionary<EquipmentEnum, List<ItemData>>> unitEquipmentDic = new();
+    public Dictionary<UnitEnum, Dictionary<EquipmentEnum, List<ItemData>>> UnitEquipmentDic
+    {
+        get => unitEquipmentDic;
+        set => unitEquipmentDic = value;
+    }
+
+    public void unitEquipmentItem(UnitEnum _unit, EquipmentEnum _part, List<ItemData> _equipment)
+    {
+
+    }
+
+    public void unitEquipmentDicClear()
+    {
+        unitEquipmentDic = new Dictionary<UnitEnum, Dictionary<EquipmentEnum, List<ItemData>>>();
+        foreach (UnitEnum _unit in UnitEnum.GetValues(typeof(UnitEnum)))
+        {
+            if (_unit == UnitEnum.None || _unit == UnitEnum.Max)
+                continue;
+
+            var equipmentPart = new Dictionary<EquipmentEnum, List<ItemData>>();
+            var emptyList = new List<ItemData>();
+            emptyList.Add(null);
+            var doubleList = new List<ItemData>();
+            doubleList.Add(null);
+            doubleList.Add(null);
+
+            equipmentPart.Add(EquipmentEnum.Weapon, emptyList);
+            equipmentPart.Add(EquipmentEnum.Shield, emptyList);
+            equipmentPart.Add(EquipmentEnum.Head, emptyList);
+            equipmentPart.Add(EquipmentEnum.Armor, emptyList);
+            equipmentPart.Add(EquipmentEnum.Gloves, emptyList);
+            equipmentPart.Add(EquipmentEnum.Boots, emptyList);
+            equipmentPart.Add(EquipmentEnum.Ring, doubleList);
+            equipmentPart.Add(EquipmentEnum.Earring, doubleList);
+            equipmentPart.Add(EquipmentEnum.Necklace, emptyList);
+
+            unitEquipmentDic.Add(_unit, equipmentPart);
+        }
+    }
 
     public SaveData()
     {
@@ -150,5 +190,9 @@ public class SaveData
 
         itemList = new List<ItemData>();
         uniqueId = 1;
+
+        unitEquipmentDicClear();
     }
+
+
 }

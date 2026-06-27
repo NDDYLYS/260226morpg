@@ -2244,7 +2244,7 @@ MonoBehaviour:
   IsUseAssetBundle: 0
   AppPackageName: 
   playerId: 
-  gameName: morpg
+  gameName: I Can't Be the Hero
 --- !u!4 &1985062083
 Transform:
   m_ObjectHideFlags: 0

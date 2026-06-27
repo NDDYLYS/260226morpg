@@ -303,7 +303,7 @@ public class TableMakerManager
     /// <returns></returns>
     private static string GetResourcesFolderPath()
     {
-        return Path.GetFullPath("../morpg/Assets/TableData");
+        return Path.GetFullPath("../I Can't Be the Hero/Assets/TableData");
     }
 
     /// <summary>
@@ -312,7 +312,7 @@ public class TableMakerManager
     /// <returns></returns>
     private static string GetStructPath()
     {
-        return Path.GetFullPath("../morpg/Assets/Scripts/Struct/TableData");
+        return Path.GetFullPath("../I Can't Be the Hero/Assets/Scripts/Struct/TableData");
     }
 
 
